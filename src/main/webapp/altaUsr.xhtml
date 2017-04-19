@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	>
+
+<h:head>
+	<title>SCAW - Presentación de JSF</title>
+</h:head>
+
+<h:body>
+	<ui:include src="/header.xhtml" />
+
+	<div class="panel-body">
+	
+		<h:form>
+			
+		
+			<h3>Nuevo usuario</h3>
+
+			<h:panelGrid columns="3">
+
+				<h:outputLabel for="usuario">Usuario:</h:outputLabel>
+				<h:inputText value="#{usuarioBean.usuario}" id="usuario"></h:inputText>
+				<br />
+				<br />
+
+				<h:outputLabel for="password">Password:</h:outputLabel>
+				<h:inputSecret type="password" value="#{usuarioBean.password}" id="password"></h:inputSecret>
+				<br />
+				<br />
+				<!-- 
+				<h:outputLabel for="tipo">Tipo:</h:outputLabel>
+				<h:inputText value="#{usuarioBean.tipo}" id="tipo"></h:inputText>
+				<br />
+				<br />  -->
+				
+				<h:outputLabel for="tipo">Tipo:</h:outputLabel>
+				<h:selectOneMenu value = "#{usuarioBean.tipo}"> 
+   					<f:selectItem itemValue = "1" itemLabel = "Administrador" /> 
+   					<f:selectItem itemValue = "2" itemLabel = "Usuario" /> 
+				</h:selectOneMenu>
+				<br />
+				<br />
+			
+				<h:outputLabel for="aprobado">Aprobado:</h:outputLabel>
+				<h:selectOneMenu value = "#{usuarioBean.aprobado}"> 
+   					<f:selectItem itemValue = "S" itemLabel = "S" /> 
+   					<f:selectItem itemValue = "N" itemLabel = "N" /> 
+				</h:selectOneMenu>
+				<br />
+				<br />
+
+				<h:commandButton action="#{usuarioBean.save}" value="Save">
+				</h:commandButton>
+				
+			</h:panelGrid>
+		</h:form>
+	</div>
+	
+</h:body>
+</html>
