@@ -24,7 +24,7 @@ public class TareaDaoImpl implements TareaDao {
 	@Override
 	public void save(Tarea tarea) {
 
-		String sql = "INSERT INTO TAREA (TITULO, DESCRIPCION, ESTADO, CREADO_POR,TIPO_TAREA) VALUES (:titulo, :descripcion, :estado, :creado_por, :tipo_tarea)";
+		String sql = "INSERT INTO TAREA (titulo, descripcion, estado, creado_por,tipoTarea) VALUES (:titulo, :descripcion, :estado, :creado_por, :tipo_tarea)";
 
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("titulo", tarea.getTitulo());
@@ -58,11 +58,12 @@ public class TareaDaoImpl implements TareaDao {
 
 		public Tarea mapRow(ResultSet rs, int rowNum) throws SQLException {
 			Tarea tarea = new Tarea();
+			
 			tarea.setTitulo(rs.getString("titulo"));
 			tarea.setDescripcion(rs.getString("descripcion"));
 			tarea.setEstado(rs.getInt("estado"));
 			tarea.setCreadoPor(rs.getInt("creado_por"));
-			//tarea.setTipoTarea(rs.getInt("tipoTarea"));
+			tarea.setTipoTarea(rs.getInt("tipo_tarea"));
 			return tarea;
 		}
 	}

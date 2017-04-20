@@ -11,7 +11,7 @@ import java.io.Serializable;
 		private String titulo;
 		private Integer estado;
 		private Integer creado_por;
-		private Integer tipo_Tarea;
+		private Integer tipo_tarea;
 
 		public Tarea() {
 		}
@@ -56,10 +56,10 @@ import java.io.Serializable;
 			this.creado_por = creadoPor;
 		}
 		public Integer getTipoTarea() {
-			return tipo_Tarea;
+			return tipo_tarea;
 		}
 
 		public void setTipoTarea(Integer tipo_Tarea) {
-			this.tipo_Tarea = tipo_Tarea;
+			this.tipo_tarea = tipo_Tarea;
 		}	
 	}
