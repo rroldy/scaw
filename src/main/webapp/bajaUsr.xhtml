@@ -18,34 +18,18 @@
 	<div class="panel-body">
 	
 		<h:form>
-
-			<h3>Baja usuario</h3>
+			
+		
+			<h3>Eliminar usuario</h3>
 
 			<h:panelGrid columns="3">
 
-				<h:outputLabel for="usuario">Usuarios:</h:outputLabel>
-				
-				<!--
+				<h:outputLabel for="usuario">Usuario:</h:outputLabel>
 				<h:inputText value="#{usuarioBean.usuario}" id="usuario"></h:inputText>
 				<br />
 				<br />
-				  
-				<h:outputLabel for="password">Password:</h:outputLabel>
-				<h:inputText value="#{usuarioBean.password}" id="password"></h:inputText>
-				<br />
-				<br />
 
-				<h:outputLabel for="tipo">Tipo:</h:outputLabel>
-				<h:inputText value="#{usuarioBean.tipo}" id="tipo"></h:inputText>
-				<br />
-				<br />
-			
-				<h:outputLabel for="aprobado">Aprobado:</h:outputLabel>
-				<h:inputText value="#{usuarioBean.aprobado}" id="aprobado"></h:inputText>
-				<br />
-				<br />-->
-
-				<h:commandButton action="#{usuarioBean.delete}" value="Eliminar">
+				<h:commandButton action="#{usuarioBean.deleteUsr(usuarioBean.usuario)}" value="Borrar">
 				</h:commandButton>
 				
 			</h:panelGrid>

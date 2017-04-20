@@ -6,6 +6,7 @@ CREATE TABLE usuario (
   tipo  	INTEGER,		/*	1 = administrador | 2 = usuario */
   aprobado 	VARCHAR(2)		/* 	S | N */
 );
+ALTER TABLE usuario ADD CONSTRAINT usuario_unique UNIQUE (usuario);
 
 DROP TABLE tipoUsuario IF EXISTS;
 CREATE TABLE tipoUsuario (

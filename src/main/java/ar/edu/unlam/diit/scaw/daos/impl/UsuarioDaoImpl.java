@@ -35,6 +35,16 @@ public class UsuarioDaoImpl implements UsuarioDao {
 		jdbcTemplate.update(sql, params);
 
 	}
+	
+	@Override
+	public void deleteUsr(String usrName) {		
+		String sql = "DELETE FROM USUARIO WHERE USUARIO LIKE :usuario";
+
+		Map<String, Object> params = new HashMap<String, Object>();
+
+		params.put("usuario", usrName);
+		jdbcTemplate.update(sql, params);		
+	}
 
 	@Override
 	public List<Usuario> findAll() {
@@ -46,7 +56,7 @@ public class UsuarioDaoImpl implements UsuarioDao {
 
 		return result;
 	}
-
+				
 	public NamedParameterJdbcTemplate getJdbcTemplate() {
 		return jdbcTemplate;
 	}

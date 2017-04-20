@@ -18,19 +18,22 @@ public class UsuarioServiceImpl implements UsuarioService {
 		usuarioDao.save(usuario);
 	}
 
+	//@Override
+	public void deleteUsr(String usrName) {
+		usuarioDao.deleteUsr(usrName);
+	}
+	
 	@Override
 	public List<Usuario> findAll() {
 		return usuarioDao.findAll();
 	}
-
+	
 	public UsuarioDao getUsuarioDao() {
 		return usuarioDao;
 	}
 
 	public void setUsuarioDao(UsuarioDao usuarioDao) {
 		this.usuarioDao = usuarioDao;
-	}
-	
-	
+	}	
 
 }
