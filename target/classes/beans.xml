@@ -54,6 +54,15 @@
 		class="ar.edu.unlam.diit.scaw.services.impl.UsuarioServiceImpl">
 		<property name="usuarioDao" ref="usuarioDao" />
 	</bean>
+	
+	<bean name="tareaDao" class="ar.edu.unlam.diit.scaw.daos.impl.TareaDaoImpl">
+		<property name="jdbcTemplate" ref="jdbcTemplate" />
+	</bean>
+
+	<bean name="tareaService"
+		class="ar.edu.unlam.diit.scaw.services.impl.TareaServiceImpl">
+		<property name="tareaDao" ref="tareaDao" />
+	</bean>
 
 </beans>
 

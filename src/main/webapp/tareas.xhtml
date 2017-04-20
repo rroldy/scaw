@@ -16,5 +16,35 @@
 
 	<h2>Listado de tareas</h2>
 	
+	<h:dataTable value="#{tareaBean.findAll}" var="tarea"
+		styleClass="order-table" headerClass="order-table-header"
+		rowClasses="order-table-odd-row,order-table-even-row">
+		
+		  
+		<h:column>
+			<f:facet name="header">Id de tarea</f:facet>    				
+      		#{tarea.id}
+  		 </h:column>
+		<h:column>
+			<f:facet name="header">Titulo de tarea</f:facet>    				
+      		#{tarea.titulo}
+  		 </h:column>
+  		 
+  		 <h:column>
+			<f:facet name="header">Descripcion</f:facet>
+      		#{tarea.descripcion}
+   		</h:column>
+
+		<h:column>
+			<f:facet name="header">Estado</f:facet>
+    	  	#{tarea.estado}
+	   </h:column>
+	   		<h:column>
+			<f:facet name="header">Creado Por</f:facet>
+    	  	#{tarea.creadoPor}
+	   </h:column>
+	   		 
+		
+	</h:dataTable>
 </h:body>
 </html>
