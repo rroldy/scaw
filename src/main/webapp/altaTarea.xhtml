@@ -16,5 +16,40 @@
 
 	<h2>Crear tarea</h2>
 	
+	<h:form>
+		<h:panelGrid columns="3">
+
+			<h:outputLabel for="titulo">Titulo</h:outputLabel>
+			<h:inputText value="#{tareaBean.titulo}" id="titulo"></h:inputText>
+			<br />
+			<br />
+
+			<h:outputLabel for="descripcion">Descripcion:</h:outputLabel>
+			<h:inputText type="descripcion" value="#{tareaBean.descripcion}" id="descripcion"></h:inputText>
+			<br />
+			<br />
+				
+			<h:outputLabel for="estado">Estado:</h:outputLabel>
+			<h:selectOneMenu value = "#{tareaBean.estado}"> 
+   				<f:selectItem itemValue = "1" itemLabel = "Pendiente" /> 
+   				<f:selectItem itemValue = "2" itemLabel = "Finalizado" /> 
+			</h:selectOneMenu>
+			<br />
+			<br />
+			
+			<h:outputLabel for="tipoTarea">Privacidad:</h:outputLabel>
+			<h:selectOneMenu value = "#{tareaBean.tipoTarea}"> 
+   				<f:selectItem itemValue = "1" itemLabel = "Privada" /> 
+   				<f:selectItem itemValue = "2" itemLabel = "Publica" /> 
+			</h:selectOneMenu>
+			<br />
+			<br />
+
+			<h:commandButton action="#{tareaBean.save}" value="Save">
+			</h:commandButton>
+				
+		</h:panelGrid>
+			
+	</h:form>
 </h:body>
 </html>

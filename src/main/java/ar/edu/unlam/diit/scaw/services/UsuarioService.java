@@ -8,6 +8,12 @@ public interface UsuarioService {
 
 	public void save(Usuario usuario);
 
+	public void deleteUsr(String nombreUsr);
+	
 	public List<Usuario> findAll();
+
+	public void changeUsrState(int idUsr, String state);
+
+	//public List<Usuario> findUsr(String nombreUsr);
 
 }

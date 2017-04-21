@@ -2,6 +2,7 @@ package ar.edu.unlam.diit.scaw.daos.impl;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,7 +36,28 @@ public class UsuarioDaoImpl implements UsuarioDao {
 		jdbcTemplate.update(sql, params);
 
 	}
+	
+	@Override
+	public void deleteUsr(String usrName) {		
+		String sql = "DELETE FROM USUARIO WHERE USUARIO LIKE :usuario";
 
+		Map<String, Object> params = new HashMap<String, Object>();
+
+		params.put("usuario", usrName);
+		jdbcTemplate.update(sql, params);		
+	}
+
+	@Override
+	public void changeUsrState(int id, String estado) {		
+		String sql = "UPDATE USUARIO SET APROBADO = :estado WHERE ID = :id";
+
+		Map<String, Object> params = new HashMap<String, Object>();
+
+		params.put("estado", estado);
+		params.put("id", id);
+		jdbcTemplate.update(sql, params);					
+	}
+	
 	@Override
 	public List<Usuario> findAll() {
 		Map<String, Object> params = new HashMap<String, Object>();
@@ -46,7 +68,7 @@ public class UsuarioDaoImpl implements UsuarioDao {
 
 		return result;
 	}
-
+				
 	public NamedParameterJdbcTemplate getJdbcTemplate() {
 		return jdbcTemplate;
 	}
@@ -67,5 +89,4 @@ public class UsuarioDaoImpl implements UsuarioDao {
 			return usuario;
 		}
 	}
-
 }

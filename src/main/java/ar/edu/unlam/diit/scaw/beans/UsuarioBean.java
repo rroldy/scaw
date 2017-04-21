@@ -37,15 +37,29 @@ public class UsuarioBean implements Serializable {
 		
 		service.save(usuario);
 		
-		return "welcome";
+		return "usuarios";
 	}
 	
+	public String deleteUsr(String nombreUsr) {
+		
+		service.deleteUsr(nombreUsr);				
+		
+		return "usuarios";
+	}	
+	
+	public String changeUsrState(int idUsr, String state) {
+		
+		if (state != "") {
+			service.changeUsrState(idUsr, state);				
+		}
+		return "usuarios";
+	}
 	
 	public List<Usuario> getFindAll() {
 		List<Usuario> list = service.findAll();
 		return list;
 	}
-	
+		
 	private Usuario buildUsuario() {
 		Usuario usuario = new Usuario();
 		usuario.setUsuario(this.usuario);

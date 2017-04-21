@@ -8,6 +8,11 @@ public interface UsuarioDao {
 
 	public void save(Usuario usuario);
 
+	public void deleteUsr(String usrName);
+	
 	public List<Usuario> findAll();
 
+	public void changeUsrState(int idUsr, String state);
+	
+	//public List<Usuario> findUsr(String nombreUsr);
 }
