@@ -36,8 +36,16 @@
 		<h:column>
 			<f:facet name="header">Aprobado</f:facet>
     	  	#{usuario.aprobado}
-	   </h:column>
-  			 		 		
+	   	</h:column>
+  	
+  		<h:column>
+  			<f:facet name="header">Habilitar</f:facet>	
+  			<h:form>	 		  			
+	  			<h:commandLink id="S" value="S" action="#{usuarioBean.changeUsrState(usuario.id,'S')}" />	  			
+	  			/
+	  			<h:commandLink id="N" value="N" action="#{usuarioBean.changeUsrState(usuario.id,'N')}" />	  				  			
+  			</h:form>   		 
+  		</h:column>	 		 		
 	</h:dataTable>
 	
 	<h4>

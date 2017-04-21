@@ -12,7 +12,7 @@ public interface UsuarioService {
 	
 	public List<Usuario> findAll();
 
-	public void changeUsrState(String nombreUsr, String state);
+	public void changeUsrState(int idUsr, String state);
 
 	//public List<Usuario> findUsr(String nombreUsr);
 

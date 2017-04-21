@@ -2,6 +2,7 @@ package ar.edu.unlam.diit.scaw.daos.impl;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -47,14 +48,14 @@ public class UsuarioDaoImpl implements UsuarioDao {
 	}
 
 	@Override
-	public void changeUsrState(String usrName, String state) {		
-		String sql = "UPDATE USUARIO SET ESTADO = :estado WHERE USUARIO LIKE :usuario";
+	public void changeUsrState(int id, String estado) {		
+		String sql = "UPDATE USUARIO SET APROBADO = :estado WHERE ID = :id";
 
 		Map<String, Object> params = new HashMap<String, Object>();
 
-		params.put("estado", state);
-		params.put("usuario", usrName);
-		jdbcTemplate.update(sql, params);		
+		params.put("estado", estado);
+		params.put("id", id);
+		jdbcTemplate.update(sql, params);					
 	}
 	
 	@Override
@@ -88,5 +89,4 @@ public class UsuarioDaoImpl implements UsuarioDao {
 			return usuario;
 		}
 	}
-
 }

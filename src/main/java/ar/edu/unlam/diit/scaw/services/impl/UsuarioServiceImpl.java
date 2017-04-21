@@ -24,8 +24,8 @@ public class UsuarioServiceImpl implements UsuarioService {
 	}
 	
 	//@Override
-	public void changeUsrState(String usrName, String state) {
-		usuarioDao.changeUsrState(usrName, state);
+	public void changeUsrState(int idUsr, String state) {
+		usuarioDao.changeUsrState(idUsr, state);
 	}
 	
 	@Override

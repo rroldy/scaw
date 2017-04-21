@@ -47,10 +47,11 @@ public class UsuarioBean implements Serializable {
 		return "usuarios";
 	}	
 	
-	public String changeUsrState(String nombreUsr, String state) {
+	public String changeUsrState(int idUsr, String state) {
 		
-		service.changeUsrState(nombreUsr, state);				
-		
+		if (state != "") {
+			service.changeUsrState(idUsr, state);				
+		}
 		return "usuarios";
 	}
 	

@@ -12,7 +12,7 @@ public interface UsuarioDao {
 	
 	public List<Usuario> findAll();
 
-	public void changeUsrState(String usrName, String state);
+	public void changeUsrState(int idUsr, String state);
 	
 	//public List<Usuario> findUsr(String nombreUsr);
 }
