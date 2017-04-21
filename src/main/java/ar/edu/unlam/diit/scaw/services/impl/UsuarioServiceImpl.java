@@ -23,6 +23,11 @@ public class UsuarioServiceImpl implements UsuarioService {
 		usuarioDao.deleteUsr(usrName);
 	}
 	
+	//@Override
+	public void changeUsrState(String usrName, String state) {
+		usuarioDao.changeUsrState(usrName, state);
+	}
+	
 	@Override
 	public List<Usuario> findAll() {
 		return usuarioDao.findAll();

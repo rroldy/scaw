@@ -23,7 +23,8 @@ public class TareaBean implements Serializable {
 	private String titulo = null;
 	private Integer estado = null;
 	private Integer creado_por = null;
-	private Integer tipo_tarea = null;
+	private Integer tipoTarea = null;
+	//private Integer usuarioCreador = null;
 	
 	ApplicationContext context = new ClassPathXmlApplicationContext(new String[] {"beans.xml"});
 	TareaService service = (TareaService) context.getBean("tareaService");
@@ -53,7 +54,7 @@ public String save() {
 		tarea.setDescripcion(this.descripcion);
 		tarea.setEstado(this.estado);
 		tarea.setCreadoPor(this.creado_por);
-		tarea.setTipoTarea(this.tipo_tarea);
+		tarea.setTipoTarea(this.tipoTarea);
 		
 		return tarea;
 	}
@@ -90,10 +91,10 @@ public String save() {
 		this.creado_por = creadoPor;
 	}
 	public Integer getTipoTarea() {
-		return tipo_tarea;
+		return tipoTarea;
 	}
 
-	public void setTipoTarea(Integer tipo_Tarea) {
-		this.tipo_tarea = tipo_Tarea;
+	public void setTipoTarea(Integer tipoTarea) {
+		this.tipoTarea = tipoTarea;
 	}	
 }

@@ -47,6 +47,17 @@ public class UsuarioDaoImpl implements UsuarioDao {
 	}
 
 	@Override
+	public void changeUsrState(String usrName, String state) {		
+		String sql = "UPDATE USUARIO SET ESTADO = :estado WHERE USUARIO LIKE :usuario";
+
+		Map<String, Object> params = new HashMap<String, Object>();
+
+		params.put("estado", state);
+		params.put("usuario", usrName);
+		jdbcTemplate.update(sql, params);		
+	}
+	
+	@Override
 	public List<Usuario> findAll() {
 		Map<String, Object> params = new HashMap<String, Object>();
 

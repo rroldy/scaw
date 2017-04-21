@@ -24,14 +24,14 @@ public class TareaDaoImpl implements TareaDao {
 	@Override
 	public void save(Tarea tarea) {
 
-		String sql = "INSERT INTO TAREA (titulo, descripcion, estado, creado_por,tipoTarea) VALUES (:titulo, :descripcion, :estado, :creado_por, :tipo_tarea)";
+		String sql = "INSERT INTO TAREA (titulo, descripcion, estado, creado_por,tipoTarea) VALUES (:titulo, :descripcion, :estado, :creado_por, :tipoTarea)";
 
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("titulo", tarea.getTitulo());
 		params.put("descripcion", tarea.getDescripcion());
 		params.put("estado", tarea.getEstado());
 		params.put("creado_por", tarea.getCreadoPor());
-		params.put("tipo_tarea", tarea.getTipoTarea());
+		params.put("tipoTarea", tarea.getTipoTarea());
 		jdbcTemplate.update(sql, params);
 
 	}
@@ -39,8 +39,9 @@ public class TareaDaoImpl implements TareaDao {
 	public List<Tarea> findAll() {
 		Map<String, Object> params = new HashMap<String, Object>();
 
+		//String sql = "SELECT T.*, U.USUARIO FROM TAREA T INNER JOIN USUARIO U ON U.ID = T.CREADO_POR";
 		String sql = "SELECT * FROM TAREA";
-
+		
 		List<Tarea> result = jdbcTemplate.query(sql, params, new TareaMapper());
 
 		return result;
@@ -63,7 +64,8 @@ public class TareaDaoImpl implements TareaDao {
 			tarea.setDescripcion(rs.getString("descripcion"));
 			tarea.setEstado(rs.getInt("estado"));
 			tarea.setCreadoPor(rs.getInt("creado_por"));
-			tarea.setTipoTarea(rs.getInt("tipo_tarea"));
+			//tarea.setUsuarioCreador(rs.getString("usuario"));
+			tarea.setTipoTarea(rs.getInt("tipoTarea"));
 			return tarea;
 		}
 	}

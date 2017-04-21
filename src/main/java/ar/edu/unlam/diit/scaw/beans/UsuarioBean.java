@@ -47,6 +47,13 @@ public class UsuarioBean implements Serializable {
 		return "usuarios";
 	}	
 	
+	public String changeUsrState(String nombreUsr, String state) {
+		
+		service.changeUsrState(nombreUsr, state);				
+		
+		return "usuarios";
+	}
+	
 	public List<Usuario> getFindAll() {
 		List<Usuario> list = service.findAll();
 		return list;

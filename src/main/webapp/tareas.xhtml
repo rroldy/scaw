@@ -37,16 +37,23 @@
 
 		<h:column>
 			<f:facet name="header">Estado</f:facet>
-    	  	#{tarea.estado}
+			<h:outputLabel 	value="Pendiente" 
+							rendered="#{tarea.estado == 1}" />
+			<h:outputLabel 	value="Finalizada" 
+							rendered="#{tarea.estado == 2}" />
 	   </h:column>
 	   		<h:column>
 			<f:facet name="header">Creado Por</f:facet>
-    	  	#{tarea.creadoPor}
+    	  	 #{tarea.creadoPor} 
+    	  				
 	   </h:column>
 	   	
 	   	<h:column>
 			<f:facet name="header">Tipo</f:facet>
-    	  	#{tarea.tipoTarea}
+			<h:outputLabel 	value="Privada" 
+							rendered="#{tarea.tipoTarea == 1}" />
+			<h:outputLabel 	value="Publica" 
+							rendered="#{tarea.tipoTarea == 2}" />
 	   	</h:column>	 
 		
 	</h:dataTable>

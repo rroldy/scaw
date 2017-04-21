@@ -14,7 +14,7 @@
 <h:body>
 	<ui:include src="/header.xhtml" />				
 					
-	<h2>Listado de usuarios</h2>
+	<h3>Listado de usuarios</h3>
 					
 	<h:dataTable value="#{usuarioBean.findAll}" var="usuario"
 		styleClass="order-table" headerClass="order-table-header"
@@ -37,20 +37,7 @@
 			<f:facet name="header">Aprobado</f:facet>
     	  	#{usuario.aprobado}
 	   </h:column>
-  		
-  	   <h:column>
-			<f:facet name="header">Autorizar</f:facet>
-    	  	<!--  #{usuario.aprobado} -->
-    	  	
-    	  	<h:commandButton action="#{usuarioBean.deleteUsr(usuarioBean.usuario)}"
-    	  					value="N" rendered="#{usuario.aprobado == 'S'}" />
-			
-			<h:commandButton action="#{usuarioBean.deleteUsr(usuarioBean.usuario)}"
-    	  					value="S" rendered="#{usuario.aprobado == 'N'}" />
-			
-    	  	
-	   </h:column>			
-  		 		
+  			 		 		
 	</h:dataTable>
 	
 	<h4>

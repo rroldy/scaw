@@ -11,7 +11,8 @@ import java.io.Serializable;
 		private String titulo;
 		private Integer estado;
 		private Integer creado_por;
-		private Integer tipo_tarea;
+		private Integer tipoTarea;
+		//private String usuarioCreador;
 
 		public Tarea() {
 		}
@@ -56,10 +57,18 @@ import java.io.Serializable;
 			this.creado_por = creadoPor;
 		}
 		public Integer getTipoTarea() {
-			return tipo_tarea;
+			return tipoTarea;
 		}
 
-		public void setTipoTarea(Integer tipo_Tarea) {
-			this.tipo_tarea = tipo_Tarea;
-		}	
+		public void setTipoTarea(Integer tipoTarea) {
+			this.tipoTarea = tipoTarea;
+		}
+		/*
+		public String getUsuarioCreador() {
+			return usuarioCreador;
+		}
+
+		public void setUsuarioCreador(String usuarioCreador) {
+			this.usuarioCreador = usuarioCreador;
+		}	*/
 	}

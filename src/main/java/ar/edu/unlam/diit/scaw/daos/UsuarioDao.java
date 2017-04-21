@@ -11,6 +11,8 @@ public interface UsuarioDao {
 	public void deleteUsr(String usrName);
 	
 	public List<Usuario> findAll();
+
+	public void changeUsrState(String usrName, String state);
 	
 	//public List<Usuario> findUsr(String nombreUsr);
 }
