@@ -19,6 +19,7 @@ public class TareaBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
+	private Integer id = null;
 	private String descripcion = null;
 	private String titulo = null;
 	private Integer estado = null;
@@ -33,7 +34,7 @@ public class TareaBean implements Serializable {
 		super();
 	}
 	
-public String save() {
+	public String save() {
 		
 		Tarea tarea = buildTarea();
 		
@@ -41,7 +42,12 @@ public String save() {
 		
 		return "tareas";
 	}
+	public String deleteTarea(Integer id) {
 	
+	service.deleteTarea(id);				
+	
+	return "Tareas";
+	}	
 	
 	public List<Tarea> getFindAll() {
 		List<Tarea> list = service.findAll();
@@ -50,6 +56,7 @@ public String save() {
 	
 	private Tarea buildTarea() {
 		Tarea tarea = new Tarea();
+		tarea.setId(this.id);
 		tarea.setTitulo(this.titulo);
 		tarea.setDescripcion(this.descripcion);
 		tarea.setEstado(this.estado);
@@ -58,7 +65,14 @@ public String save() {
 		
 		return tarea;
 	}
-	
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
 	public String getTitulo() {
 		return titulo;
 	}
