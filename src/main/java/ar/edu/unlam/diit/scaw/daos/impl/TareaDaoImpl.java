@@ -24,9 +24,10 @@ public class TareaDaoImpl implements TareaDao {
 	@Override
 	public void save(Tarea tarea) {
 
-		String sql = "INSERT INTO TAREA (titulo, descripcion, estado, creado_por,tipoTarea) VALUES (:titulo, :descripcion, :estado, :creado_por, :tipoTarea)";
+		String sql = "INSERT INTO TAREA (id,titulo, descripcion, estado, creado_por,tipoTarea) VALUES (:id, :titulo, :descripcion, :estado, :creado_por, :tipoTarea)";
 
 		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("id", tarea.getId());
 		params.put("titulo", tarea.getTitulo());
 		params.put("descripcion", tarea.getDescripcion());
 		params.put("estado", tarea.getEstado());
@@ -35,6 +36,17 @@ public class TareaDaoImpl implements TareaDao {
 		jdbcTemplate.update(sql, params);
 
 	}
+	
+	@Override
+	public void deleteTarea(Integer id) {		
+		String sql = "DELETE FROM TAREA WHERE id = :idTarea";
+
+		Map<String, Object> params = new HashMap<String, Object>();
+
+		params.put("idTarea", id);
+		jdbcTemplate.update(sql, params);		
+	}
+	
 	@Override
 	public List<Tarea> findAll() {
 		Map<String, Object> params = new HashMap<String, Object>();
@@ -60,6 +72,7 @@ public class TareaDaoImpl implements TareaDao {
 		public Tarea mapRow(ResultSet rs, int rowNum) throws SQLException {
 			Tarea tarea = new Tarea();
 			
+			tarea.setId(rs.getInt("id"));
 			tarea.setTitulo(rs.getString("titulo"));
 			tarea.setDescripcion(rs.getString("descripcion"));
 			tarea.setEstado(rs.getInt("estado"));

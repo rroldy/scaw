@@ -42,7 +42,7 @@
 			<h:outputLabel 	value="Finalizada" 
 							rendered="#{tarea.estado == 2}" />
 	   </h:column>
-	   		<h:column>
+	   <h:column>
 			<f:facet name="header">Creado Por</f:facet>
     	  	 #{tarea.creadoPor} 
     	  				
@@ -55,7 +55,13 @@
 			<h:outputLabel 	value="Publica" 
 							rendered="#{tarea.tipoTarea == 2}" />
 	   	</h:column>	 
-		
+	   	<h:column>
+	   		<f:facet name="header">Accion</f:facet>
+			<h:form>
+				<h:commandButton action="#{tareaBean.deleteTarea(tareaBean.id)}" value="Borrar">
+				</h:commandButton>
+			</h:form>
+		</h:column>
 	</h:dataTable>
 </h:body>
 </html>

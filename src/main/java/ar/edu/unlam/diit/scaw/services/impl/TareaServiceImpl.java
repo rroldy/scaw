@@ -32,4 +32,9 @@ public class TareaServiceImpl implements TareaService {
 		this.tareaDao = tareaDao;
 	}
 	
+	//@Override
+	public void deleteTarea(Integer id) {
+		tareaDao.deleteTarea(id);
+	}
+	
 }

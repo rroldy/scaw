@@ -9,4 +9,8 @@ public interface TareaDao {
 	public void save(Tarea tarea);
 
 	public List<Tarea> findAll();
+	
+	public void deleteTarea(Integer id);
+	
+	//public void editTarea(Tarea tarea);
 }
