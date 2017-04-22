@@ -76,6 +76,27 @@ public class UsuarioDaoImpl implements UsuarioDao {
 	public void setJdbcTemplate(NamedParameterJdbcTemplate jdbcTemplate) {
 		this.jdbcTemplate = jdbcTemplate;
 	}
+	
+	@Override
+	public Usuario buscarUsuario(String usuario, String password){
+		
+		Map<String, Object> params = new HashMap<String, Object>(); //contiene los datos que se usaran en la query
+		
+		//seteo de parametros
+		params.put("usuario", usuario);
+		params.put("password", password);
+
+		String sql = "SELECT * FROM USUARIO WHERE usuario LIKE :usuario AND password LIKE :password";
+		
+		List<Usuario> result = jdbcTemplate.query(sql, params, new UsuarioMapper());
+		
+		if(result.size() == 0)
+			
+			return null;
+		else
+			return result.get(0); //obtuve datos de una consulta y los guardo en un array, indexo en posicion 0 porque solo obtengo uno y lo retorno
+		
+	}
 
 	private static final class UsuarioMapper implements RowMapper<Usuario> {
 

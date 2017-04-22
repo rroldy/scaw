@@ -21,9 +21,9 @@
 		<h:inputText value="#{usuarioBean.usuario}"></h:inputText>
 		<br></br>
 		<h:outputText value="Ingrese Contraseña:"></h:outputText><br></br>
-		<h:inputText value="#{usuarioBean.password}"></h:inputText>
+		<h:inputSecret value="#{usuarioBean.password}"></h:inputSecret>
 		<br></br>
-		<!-- <h:comandButton value="Ingresar" action=""></h:comandButton> -->
+		<h:commandButton value="Ingresar" action="#{usuarioBean.autentificarUsuario}"></h:commandButton>
 	</h:form>
 	
 </h:body>

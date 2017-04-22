@@ -5,10 +5,11 @@ import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
 import javax.faces.bean.ManagedBean;
+import javax.faces.context.FacesContext;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-
+import ar.edu.unlam.diit.scaw.daos.impl.UsuarioDaoImpl;
 import ar.edu.unlam.diit.scaw.entities.Usuario;
 import ar.edu.unlam.diit.scaw.services.UsuarioService;
 
@@ -109,4 +110,38 @@ public class UsuarioBean implements Serializable {
 	public void setAprobado(String aprobado) {
 		this.aprobado = aprobado;
 	}
+	
+	//generacion de la sesion de usuario 
+	public String autentificarUsuario(){ //este metodo DEBE RETORNAR SIEMPRE un String
+		
+		UsuarioDaoImpl usuarioDaoImpl = new UsuarioDaoImpl();
+		
+		String resultado;
+		
+		Usuario usuarioEncontrado = usuarioDaoImpl.buscarUsuario(usuario,password); //se busca el usuario
+			
+		if(usuarioEncontrado !=null){
+			
+			//se crea una nueva sesión para este usuario
+			/*
+			HttpSession session = request.getSession(true);
+			
+			session.setAttribute("usuario", usuarioEncontrado.getUsuario());
+			session.setAttribute("tipo", usuarioEncontrado.getTipo());
+			session.setAttribute("id", usuarioEncontrado.getId());
+			session.setAttribute("aprobado", usuarioEncontrado.getAprobado());
+			*/
+			
+			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario", usuarioEncontrado);
+			
+			resultado = "welcome";
+			
+		}
+		else
+			resultado = "login";
+		
+		System.out.println(resultado);
+		return resultado;
+	}
+
 }
