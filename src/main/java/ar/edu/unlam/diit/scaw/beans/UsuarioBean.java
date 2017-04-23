@@ -112,18 +112,18 @@ public class UsuarioBean implements Serializable {
 	}
 	
 	//generacion de la sesion de usuario 
-	public String autentificarUsuario(){ //este metodo DEBE RETORNAR SIEMPRE un String
+	public String crearSesion(){ //este metodo DEBE RETORNAR SIEMPRE un String
 		
 		UsuarioDaoImpl usuarioDaoImpl = new UsuarioDaoImpl();
 		
 		String resultado;
 		
 		Usuario usuarioEncontrado = usuarioDaoImpl.buscarUsuario(usuario,password); //se busca el usuario
-			
+		
 		if(usuarioEncontrado !=null){
 			
 			//se crea una nueva sesión para este usuario
-			/*
+			/*	
 			HttpSession session = request.getSession(true);
 			
 			session.setAttribute("usuario", usuarioEncontrado.getUsuario());
@@ -142,6 +142,21 @@ public class UsuarioBean implements Serializable {
 		
 		System.out.println(resultado);
 		return resultado;
+	}
+	
+	public String eliminarSesion(){
+		
+		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+		
+		return "login";
+	}
+	
+	//este metodo se debe incluir en las vistas para resstringir acceso no autorizado
+	public boolean verificarSesion(){
+		
+		if(FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario") != null)
+			return true;
+		else return false;
 	}
 
 }

@@ -80,7 +80,11 @@ public class UsuarioDaoImpl implements UsuarioDao {
 	@Override
 	public Usuario buscarUsuario(String usuario, String password){
 		
+		
+		
+		
 		Map<String, Object> params = new HashMap<String, Object>(); //contiene los datos que se usaran en la query
+		Usuario usuarioEncontrado = new Usuario();
 		
 		//seteo de parametros
 		params.put("usuario", usuario);
@@ -90,11 +94,20 @@ public class UsuarioDaoImpl implements UsuarioDao {
 		
 		List<Usuario> result = jdbcTemplate.query(sql, params, new UsuarioMapper());
 		
-		if(result.size() == 0)
+		
+		/*
+		if(result.size() == 0){
 			
+			System.out.println("no se encontro el usuario");
 			return null;
-		else
-			return result.get(0); //obtuve datos de una consulta y los guardo en un array, indexo en posicion 0 porque solo obtengo uno y lo retorno
+		}
+		else{
+			 usuarioEncontrado = result.get(0);
+		
+			return usuarioEncontrado; //obtuve datos de una consulta y los guardo en un array, indexo en posicion 0 porque solo obtengo uno y lo retorno
+		}
+		*/
+		return null;
 		
 	}
 
