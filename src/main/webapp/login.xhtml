@@ -15,5 +15,16 @@
 	
 	<h2>Login</h2>
 	
+	<h:form>
+		
+		<h:outputText value="Ingrese Usuario:"></h:outputText><br></br>
+		<h:inputText value="#{usuarioBean.usuario}"></h:inputText>
+		<br></br>
+		<h:outputText value="Ingrese Contraseña:"></h:outputText><br></br>
+		<h:inputSecret value="#{usuarioBean.password}"></h:inputSecret>
+		<br></br>
+		<h:commandButton value="Ingresar" action="#{usuarioBean.autentificarUsuario}"></h:commandButton>
+	</h:form>
+	
 </h:body>
 </html>
