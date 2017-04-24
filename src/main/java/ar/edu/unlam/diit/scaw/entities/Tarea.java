@@ -7,6 +7,7 @@ import java.io.Serializable;
 		private static final long serialVersionUID = 1L;
 
 		private Integer id;
+		private String id2;
 		private String descripcion;
 		private String titulo;
 		private Integer estado;
@@ -24,7 +25,13 @@ import java.io.Serializable;
 		public void setId(Integer id) {
 			this.id = id;
 		}
+		public String getId2() {
+			return id2;
+		}
 
+		public void setId2(String id2) {
+			this.id2 = id2;
+		}
 		public String getTitulo() {
 			return titulo;
 		}
