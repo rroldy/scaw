@@ -5,7 +5,9 @@ import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
 import javax.faces.bean.ManagedBean;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+//import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -41,12 +43,31 @@ public class UsuarioBean implements Serializable {
 		return "usuarios";
 	}
 	
+	public String update(String usrName, int tipo, String aprobado) {
+		
+		ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+	    String userOld = ec.getRequestParameterMap().get("formId:userOld");
+		
+		service.update(userOld, usrName, tipo, aprobado);
+		
+		return "usuarios";
+	}
+	
 	public String deleteUsr(String nombreUsr) {
 		
 		service.deleteUsr(nombreUsr);				
 		
 		return "usuarios";
 	}	
+	
+	public String editUsr(String nombreUsr) {
+		List<Usuario> list = service.editUsr(nombreUsr);
+		if(list.isEmpty()) {
+			return "editarUsr";
+		}
+		
+		return "editarUsrDisplay";
+	}
 	
 	public String changeUsrState(int idUsr, String state) {
 		
@@ -112,18 +133,18 @@ public class UsuarioBean implements Serializable {
 	}
 	
 	//generacion de la sesion de usuario 
-	public String autentificarUsuario(){ //este metodo DEBE RETORNAR SIEMPRE un String
+	public String crearSesion(){ //este metodo DEBE RETORNAR SIEMPRE un String
 		
 		UsuarioDaoImpl usuarioDaoImpl = new UsuarioDaoImpl();
 		
 		String resultado;
 		
 		Usuario usuarioEncontrado = usuarioDaoImpl.buscarUsuario(usuario,password); //se busca el usuario
-			
+		
 		if(usuarioEncontrado !=null){
 			
 			//se crea una nueva sesión para este usuario
-			/*
+			/*	
 			HttpSession session = request.getSession(true);
 			
 			session.setAttribute("usuario", usuarioEncontrado.getUsuario());
@@ -142,6 +163,21 @@ public class UsuarioBean implements Serializable {
 		
 		System.out.println(resultado);
 		return resultado;
+	}
+	
+	public String eliminarSesion(){
+		
+		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+		
+		return "login";
+	}
+	
+	//este metodo se debe incluir en las vistas para resstringir acceso no autorizado
+	public boolean verificarSesion(){
+		
+		if(FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario") != null)
+			return true;
+		else return false;
 	}
 
 }

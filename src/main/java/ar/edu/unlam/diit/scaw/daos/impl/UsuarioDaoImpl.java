@@ -38,6 +38,20 @@ public class UsuarioDaoImpl implements UsuarioDao {
 	}
 	
 	@Override
+	public void update(String usrNameOld, String usrName, int tipo, String aprobado) {
+
+		String sql = "UPDATE USUARIO SET USUARIO = :usuario, TIPO = :tipo, APROBADO = :aprobado WHERE USUARIO LIKE :usuarioOld";
+
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("usuarioOld", usrNameOld);
+		params.put("usuario", usrName);
+		params.put("tipo", tipo);
+		params.put("aprobado", aprobado);
+		jdbcTemplate.update(sql, params);
+
+	}
+	
+	@Override
 	public void deleteUsr(String usrName) {		
 		String sql = "DELETE FROM USUARIO WHERE USUARIO LIKE :usuario";
 
@@ -47,6 +61,18 @@ public class UsuarioDaoImpl implements UsuarioDao {
 		jdbcTemplate.update(sql, params);		
 	}
 
+	@Override
+	public List<Usuario> editUsr(String usrName) {		
+		String sql = "SELECT * FROM USUARIO WHERE USUARIO LIKE :usuario";
+		
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("usuario", usrName);
+		
+		List<Usuario> result = jdbcTemplate.query(sql, params, new UsuarioMapper());
+
+		return result;	
+	}
+	
 	@Override
 	public void changeUsrState(int id, String estado) {		
 		String sql = "UPDATE USUARIO SET APROBADO = :estado WHERE ID = :id";
@@ -80,7 +106,11 @@ public class UsuarioDaoImpl implements UsuarioDao {
 	@Override
 	public Usuario buscarUsuario(String usuario, String password){
 		
+		
+		
+		
 		Map<String, Object> params = new HashMap<String, Object>(); //contiene los datos que se usaran en la query
+		Usuario usuarioEncontrado = new Usuario();
 		
 		//seteo de parametros
 		params.put("usuario", usuario);
@@ -90,11 +120,20 @@ public class UsuarioDaoImpl implements UsuarioDao {
 		
 		List<Usuario> result = jdbcTemplate.query(sql, params, new UsuarioMapper());
 		
-		if(result.size() == 0)
+		
+		/*
+		if(result.size() == 0){
 			
+			System.out.println("no se encontro el usuario");
 			return null;
-		else
-			return result.get(0); //obtuve datos de una consulta y los guardo en un array, indexo en posicion 0 porque solo obtengo uno y lo retorno
+		}
+		else{
+			 usuarioEncontrado = result.get(0);
+		
+			return usuarioEncontrado; //obtuve datos de una consulta y los guardo en un array, indexo en posicion 0 porque solo obtengo uno y lo retorno
+		}
+		*/
+		return null;
 		
 	}
 

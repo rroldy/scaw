@@ -14,6 +14,8 @@ public interface UsuarioService {
 
 	public void changeUsrState(int idUsr, String state);
 
-	//public List<Usuario> findUsr(String nombreUsr);
+	public List<Usuario> editUsr(String nombreUsr);
+
+	public void update(String usrNameOld, String usrName, int tipo, String aprobado);
 
 }

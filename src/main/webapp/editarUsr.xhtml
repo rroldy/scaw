@@ -17,9 +17,24 @@
 
 	<div class="panel-body">
 	
-	
+		<h:form>
+			
+		
 			<h3>Editar usuario</h3>
 
+			<h:panelGrid columns="3">
+
+				<h:outputLabel for="usuario">Usuario:</h:outputLabel>
+				<h:inputText value="#{usuarioBean.usuario}" id="usuario"></h:inputText>				
+			</h:panelGrid>
+			<br />
+				
+			<h:commandButton 
+				action="#{usuarioBean.editUsr(usuarioBean.usuario)}" value="Buscar">
+			</h:commandButton>
+				
+			
+		</h:form>
 	</div>
 	
 </h:body>

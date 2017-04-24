@@ -23,7 +23,7 @@
 		<h:outputText value="Ingrese Contraseña:"></h:outputText><br></br>
 		<h:inputSecret value="#{usuarioBean.password}"></h:inputSecret>
 		<br></br>
-		<h:commandButton value="Ingresar" action="#{usuarioBean.autentificarUsuario}"></h:commandButton>
+		<h:commandButton value="Ingresar" action="#{usuarioBean.crearSesion()}"></h:commandButton>
 	</h:form>
 	
 </h:body>
