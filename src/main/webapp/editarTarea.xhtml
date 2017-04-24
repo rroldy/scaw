@@ -15,6 +15,44 @@
 	<ui:include src="/header.xhtml" /> 
 
 	<h2>Editar tarea</h2>
+		<div class="panel-body">
 	
+		<h:form id="formId" name="formId">
+			<!-- Guardo el antiguo nombre del usuario para hacer el UPDATE -->
+				<h:inputHidden value="#{TareaBean.id}" id="id" name="formId:id"></h:inputHidden> 
+			<h3>Editar usuario</h3>
+			
+			<h:panelGrid columns="3">											
+				<h:outputLabel for="Titulo">Titulo:</h:outputLabel>
+				<h:inputText value="#{tareaBean.titulo}" />
+				<br />
+				<br />	
+				<h:outputLabel for="Descripcion">Descripcion:</h:outputLabel>
+				<h:inputText value="#{tareaBean.descripcion}" />
+				<br />
+				<br />
+				
+				<h:outputLabel for="tipo">Tipo:</h:outputLabel>
+				<h:selectOneMenu value = "#{tareaBean.tipoTarea}"> 
+	   				<f:selectItem itemValue = "1" itemLabel = "Privada" /> 
+	   				<f:selectItem itemValue = "2" itemLabel = "Publica" /> 
+				</h:selectOneMenu>
+				<br />
+				<br />	
+								<h:outputLabel for="estado">Estado:</h:outputLabel>
+				<h:selectOneMenu value = "#{tareaBean.estado}"> 
+	   				<f:selectItem itemValue = "1" itemLabel = "Pendiente" /> 
+	   				<f:selectItem itemValue = "2" itemLabel = "Finalizado" /> 
+				</h:selectOneMenu>
+				<br />
+				<br />	
+				
+
+       	  	</h:panelGrid>
+       	  	<br />	
+       	  	<h:commandButton action="#{tareaBean.update(tareaBean.titulo, tareaBean.descripcion, tareaBean.estado, tareaBean.tipoTarea)}"	value="Guardar cambios">
+			</h:commandButton>
+		</h:form>
+	</div>
 </h:body>
 </html>

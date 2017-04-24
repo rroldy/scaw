@@ -10,6 +10,7 @@ import ar.edu.unlam.diit.scaw.entities.Tarea;
 
 
 
+
 public class TareaServiceImpl implements TareaService {
 	@Autowired
 	TareaDao tareaDao;
@@ -19,6 +20,14 @@ public class TareaServiceImpl implements TareaService {
 		tareaDao.save(tarea);
 	}
 
+	//@Override
+	public List<Tarea> editTarea(Integer id	) {
+		return tareaDao.editTarea(id);
+	}
+	@Override
+	public void update(String id,String titulo, String descripcion, Integer tipoTarea, Integer estado) {
+		tareaDao.update(id,titulo, descripcion, tipoTarea, estado);
+	}
 	@Override
 	public List<Tarea> findAll() {
 		return tareaDao.findAll();

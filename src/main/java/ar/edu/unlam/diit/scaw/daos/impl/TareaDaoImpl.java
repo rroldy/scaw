@@ -13,6 +13,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import ar.edu.unlam.diit.scaw.daos.TareaDao;
 import ar.edu.unlam.diit.scaw.entities.Tarea;
 
+
 public class TareaDaoImpl implements TareaDao {
 	@Autowired
 	NamedParameterJdbcTemplate jdbcTemplate;
@@ -33,6 +34,32 @@ public class TareaDaoImpl implements TareaDao {
 		params.put("estado", tarea.getEstado());
 		params.put("creado_por", tarea.getCreadoPor());
 		params.put("tipoTarea", tarea.getTipoTarea());
+		jdbcTemplate.update(sql, params);
+
+	}
+	@Override
+	public List<Tarea> editTarea(Integer id) {		
+		String sql = "SELECT * FROM TAREA WHERE ID = :id";
+		
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("id", id);
+		
+		List<Tarea> result = jdbcTemplate.query(sql, params, new TareaMapper());
+
+		return result;	
+	}
+	
+	@Override
+	public void update(String id, String titulo,String descripcion, Integer tipoTarea, Integer estado) {
+
+		String sql = "UPDATE TAREA SET titulo = :titulo, descripcion = :descripcion, estado = :estado,tipo = :tipoTarea WHERE id = :id";
+		Integer id2 = Integer.parseInt(id);
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("id", id2);
+		params.put("titulo", titulo);
+		params.put("descripcion", descripcion);
+		params.put("tipoTarea", tipoTarea);
+		params.put("estado", estado);
 		jdbcTemplate.update(sql, params);
 
 	}

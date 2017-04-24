@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
 import javax.faces.bean.ManagedBean;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -49,6 +51,26 @@ public class TareaBean implements Serializable {
 		return "Tareas";
 	}	
 	
+	public String editTarea(String id) {
+		Integer id2 = Integer.parseInt(id);
+		List<Tarea> list = service.editTarea(id2);
+		if(list.isEmpty()) {
+			return "tareas";
+		}
+		
+		return "editarTarea";
+	}
+	
+
+	public String update(String titulo, String descripcion, Integer tipoTarea, Integer estado) {
+		
+		ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+	    String idTarea = ec.getRequestParameterMap().get("formId:id");
+		
+		service.update(idTarea, titulo, descripcion, tipoTarea,estado);
+		
+		return "tareas";
+	}
 	public List<Tarea> getFindAll() {
 		List<Tarea> list = service.findAll();
 		return list;

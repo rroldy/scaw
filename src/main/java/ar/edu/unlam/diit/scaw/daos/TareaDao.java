@@ -12,5 +12,7 @@ public interface TareaDao {
 	
 	public void deleteTarea(Integer id);
 	
-	//public void editTarea(Tarea tarea);
+	public List<Tarea> editTarea(Integer tarea);
+	
+	public void update(String id, String titulo, String descripcion, Integer tipoTarea, Integer estado);
 }
