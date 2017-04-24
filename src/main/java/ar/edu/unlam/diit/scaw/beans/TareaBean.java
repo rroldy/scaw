@@ -20,7 +20,6 @@ public class TareaBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private Integer id = null;
-	private String id2 = null;
 	private String descripcion = null;
 	private String titulo = null;
 	private Integer estado = null;
@@ -44,10 +43,10 @@ public class TareaBean implements Serializable {
 		return "tareas";
 	}
 	public String deleteTarea(String id) {
-	Integer id2 = Integer.parseInt(id);
-	service.deleteTarea(id2);				
+		
+		service.deleteTarea(Integer.parseInt(id));				
 	
-	return "Tareas";
+		return "Tareas";
 	}	
 	
 	public List<Tarea> getFindAll() {
@@ -74,13 +73,7 @@ public class TareaBean implements Serializable {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public String getId2() {
-		return id2;
-	}
-
-	public void setId2(String id2) {
-		this.id2 = id2;
-	}
+	
 	public String getTitulo() {
 		return titulo;
 	}
