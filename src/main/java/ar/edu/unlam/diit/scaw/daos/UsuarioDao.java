@@ -15,11 +15,13 @@ public interface UsuarioDao {
 	public void changeUsrState(int idUsr, String state);
 	
 	//corresponde al login de usuario
-	public Usuario buscarUsuario(String usuario, String password);
+	//public Usuario buscarUsuario(String usuario, String password);
 
 	public List<Usuario> editUsr(String usrName);
 
 	public void update(String usrNameOld, String usrName, int tipo, String aprobado);
+
+	public List<Usuario> crearSesion(String usrName, String password);
 	
 	//public List<Usuario> findUsr(String nombreUsr);
 }

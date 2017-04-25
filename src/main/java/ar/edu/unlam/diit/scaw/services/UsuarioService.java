@@ -18,4 +18,6 @@ public interface UsuarioService {
 
 	public void update(String usrNameOld, String usrName, int tipo, String aprobado);
 
+	public List<Usuario> crearSesion(String usrName, String password);
+
 }

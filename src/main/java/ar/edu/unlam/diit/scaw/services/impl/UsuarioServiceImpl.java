@@ -51,4 +51,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 		this.usuarioDao = usuarioDao;
 	}	
 
+	public List<Usuario> crearSesion(String usrName, String password) {
+		return usuarioDao.crearSesion(usrName, password);
+	}
 }

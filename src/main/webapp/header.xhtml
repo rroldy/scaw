@@ -6,6 +6,7 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
 	>
 
 <h:head>
@@ -13,45 +14,67 @@
 </h:head>
 
 <h:body>	
-	<!-- Administrador -->
-
-	<ul style="list-style-type:none; margin: 0; padding: 0;">
-		<li>
-			<h:link value="Listado usuarios" outcome="usuarios" /> |
-	  		<h:link value="Alta usuario" outcome="altaUsr" /> | 
-	  		<h:link value="Baja usuario" outcome="bajaUsr" /> | 
-	  		<h:link value="Editar usuario" outcome="editarUsr" /> |
-	  		<h:link value="Listado tareas" outcome="tareas" /> |
-	  		<h:link value="Crear tarea" outcome="altaTarea" /> |
-	  		<h:link value="Editar tarea" outcome="editarTarea" /> |
-	  		
-	  		<h:link value="Salir" align="right" outcome="index" />
-	  		<!--   <a style="float:right" class="active" href="#about">Salir</a> -->
-	  	</li>
-	</ul>
+	<!-- Menu administrador -->
+    
+    <h:panelGroup rendered="#{sessionScope.usuario.tipo == 1}">
+   		<h:panelGrid columns="1" border="1">
+			<h:outputLabel align="center" id="adminNameLabel" 
+			for="adminName" value=" Bienvenido: #{sessionScope.usuario.usuario} " /> 
+		</h:panelGrid>
+		<br />
+		
+		<h:panelGrid columns="18" border="0">
 	
-	<!-- Usuario -->
-	<!--  
-	<ul style="list-style-type:none; margin: 0; padding: 0;">
-  		<li>
-  			<a href="#home">Listado tareas</a> | 
-  			<a href="#news">Crear tarea</a> |
-  			<a href="#contact">Editar tarea</a> |
-  			
-  			<h:link value="Salir" align="right" outcome="index" />  			
-  		</li>
-	</ul>
-	-->
+			<ul style="list-style-type:none; margin: 0; padding: 0;">
+				<li>
+					<h:link value="Listado usuarios" outcome="usuarios" /> |
+		  			<h:link value="Alta usuario" outcome="altaUsr" /> | 
+		  			<h:link value="Baja usuario" outcome="bajaUsr" /> | 
+		  			<h:link value="Editar usuario" outcome="editarUsr" /> |
+		  			<h:link value="Listado tareas" outcome="tareas" /> |
+		  			<h:link value="Crear tarea" outcome="altaTarea" /> |  		
+		  			<h:form padding="top"> 
+		  				<h:commandLink id="Salir" value="Salir" align="right" action="#{usuarioBean.eliminarSesion}" /> 
+		  			</h:form>	  		
+		  		</li>
+			</ul>
+		</h:panelGrid>
+    	
+	</h:panelGroup>
+    
+	<!-- Menu usuario -->
+	<h:panelGroup rendered="#{sessionScope.usuario.tipo == 2}">
+		<h:panelGrid columns="1" border="1">
+			<h:outputLabel align="center" id="usernameLabel" 
+			for="username" value=" Bienvenido: #{sessionScope.usuario.usuario} " /> 
+		</h:panelGrid>
+		<br />
+		
+		<h:panelGrid columns="18" border="0">
 	
-	<!-- Anonimo -->
-	<!--  	
-	<ul style="list-style-type:none; margin: 0; padding: 0;">
-  		<li>
-  			<h:link value="Listado tareas" outcome="tareas" /> | 
-  			<h:link value="Registrarse" align="right" outcome="login" />
-  		</li>
-	</ul>
-	-->	
+			<ul style="list-style-type:none; margin: 0; padding: 0;">
+				<li>
+					<h:link value="Listado tareas" outcome="tareas" /> |
+		  			<h:link value="Crear tarea" outcome="altaTarea" /> |	  		
+		  			<h:form padding="top"> 
+		  				<h:commandLink id="Salir" value="Salir" align="right" action="#{usuarioBean.eliminarSesion}" /> 
+		  			</h:form>	  		
+		  		</li>
+			</ul>
+		</h:panelGrid>
+    	
+	</h:panelGroup>
+	
+	<!-- Menu anonimo -->
+	<h:panelGroup rendered="#{sessionScope.usuario.tipo == NULL}">
+		<ul style="list-style-type:none; margin: 0; padding: 0;">
+				<li>
+					<h:link value="Listado tareas" outcome="tareas" /> |
+		  			<h:link value="Registrarse" align="right" outcome="login" />
+		  		</li>
+			</ul>
+	
+	</h:panelGroup>
 			
 </h:body>
 </html>

@@ -7,11 +7,13 @@ import javax.enterprise.context.RequestScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
-//import javax.servlet.http.HttpServletRequest;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import ar.edu.unlam.diit.scaw.daos.impl.UsuarioDaoImpl;
 import ar.edu.unlam.diit.scaw.entities.Usuario;
 import ar.edu.unlam.diit.scaw.services.UsuarioService;
 
@@ -132,43 +134,60 @@ public class UsuarioBean implements Serializable {
 		this.aprobado = aprobado;
 	}
 	
-	//generacion de la sesion de usuario 
-	public String crearSesion(){ //este metodo DEBE RETORNAR SIEMPRE un String
+	// Generacion de la sesion de usuario 
+	public String crearSesion(String usrName, String password ) throws ServletException { 
 		
-		UsuarioDaoImpl usuarioDaoImpl = new UsuarioDaoImpl();
+		List<Usuario> list = service.crearSesion(usrName, password);
 		
-		String resultado;
+		if(list.isEmpty()) {	// usuario no registrado
+			FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+			return "login";
 		
-		Usuario usuarioEncontrado = usuarioDaoImpl.buscarUsuario(usuario,password); //se busca el usuario
-		
-		if(usuarioEncontrado !=null){
+		} else {				// usuario registrado en sistema
+			FacesContext context = FacesContext.getCurrentInstance();
+			HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
 			
-			//se crea una nueva sesión para este usuario
-			/*	
+			//request.login(usrName, password);
+			//HttpSession session = request.getSession(true);
+			
+			//Se crea una nueva sesión para este usuario
+			Usuario usuario = new Usuario();
+			usuario.setId(list.get(0).getId());
+			usuario.setUsuario(list.get(0).getUsuario());
+			usuario.setTipo(list.get(0).getTipo());
+			usuario.setAprobado(list.get(0).getAprobado());
+			
 			HttpSession session = request.getSession(true);
+			session.setAttribute("id", usuario.getId());
+			session.setAttribute("usuario", usuario.getUsuario());
+			session.setAttribute("tipo", usuario.getTipo());
+			session.setAttribute("aprobado", usuario.getAprobado());
 			
-			session.setAttribute("usuario", usuarioEncontrado.getUsuario());
-			session.setAttribute("tipo", usuarioEncontrado.getTipo());
-			session.setAttribute("id", usuarioEncontrado.getId());
-			session.setAttribute("aprobado", usuarioEncontrado.getAprobado());
-			*/
+			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario", usuario);
+			//FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put(key,object);
 			
-			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario", usuarioEncontrado);
-			
-			resultado = "welcome";
+			if (usuario.getTipo() == 1) { 
+				return "usuarios";	// Administrador -> muestro usuarios					
+			} else {
+				return "tareas";	// Usuarios -> muestro tareas
+			}
 			
 		}
-		else
-			resultado = "login";
-		
-		System.out.println(resultado);
-		return resultado;
 	}
 	
-	public String eliminarSesion(){
+	public String eliminarSesion() throws ServletException{
+				
+		FacesContext context = FacesContext.getCurrentInstance();
+		HttpServletRequest request = (HttpServletRequest)context.getExternalContext().getRequest();
+	
+		//try {
+			request.logout();
+		//} catch (ServletException e) {
+			// TODO Auto-generated catch block
+			//e.printStackTrace();
+	//	}
 		
 		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-		
 		return "login";
 	}
 	
@@ -177,7 +196,8 @@ public class UsuarioBean implements Serializable {
 		
 		if(FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario") != null)
 			return true;
-		else return false;
+		else 
+			return false;
 	}
 
 }
