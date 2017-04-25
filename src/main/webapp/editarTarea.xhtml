@@ -18,29 +18,29 @@
 		<div class="panel-body">
 	
 		<h:form id="formId" name="formId">
-			<!-- Guardo el antiguo nombre del usuario para hacer el UPDATE -->
+			
 				<h:inputHidden value="#{TareaBean.id}" id="id" name="formId:id"></h:inputHidden> 
 			<h3>Editar usuario</h3>
 			
 			<h:panelGrid columns="3">											
-				<h:outputLabel for="Titulo">Titulo:</h:outputLabel>
-				<h:inputText value="#{tareaBean.titulo}" />
+				<h:outputLabel for="titulo" >Titulo:</h:outputLabel>
+				<h:inputText value="#{TareaBean.titulo}" id="titulo" />
 				<br />
 				<br />	
-				<h:outputLabel for="Descripcion">Descripcion:</h:outputLabel>
-				<h:inputText value="#{tareaBean.descripcion}" />
+				<h:outputLabel for="descripcion">Descripcion:</h:outputLabel>
+				<h:inputText value="#{TareaBean.descripcion}" id="descripcion"/>
 				<br />
 				<br />
 				
-				<h:outputLabel for="tipo">Tipo:</h:outputLabel>
-				<h:selectOneMenu value = "#{tareaBean.tipoTarea}"> 
+				<h:outputLabel for="tipoTarea">Tipo:</h:outputLabel>
+				<h:selectOneMenu value = "#{TareaBean.tipoTarea}" id="tipoTarea"> 
 	   				<f:selectItem itemValue = "1" itemLabel = "Privada" /> 
 	   				<f:selectItem itemValue = "2" itemLabel = "Publica" /> 
 				</h:selectOneMenu>
 				<br />
 				<br />	
-								<h:outputLabel for="estado">Estado:</h:outputLabel>
-				<h:selectOneMenu value = "#{tareaBean.estado}"> 
+				<h:outputLabel for="estado">Estado:</h:outputLabel>
+				<h:selectOneMenu value = "#{TareaBean.estado}" id="estado"> 
 	   				<f:selectItem itemValue = "1" itemLabel = "Pendiente" /> 
 	   				<f:selectItem itemValue = "2" itemLabel = "Finalizado" /> 
 				</h:selectOneMenu>
@@ -50,7 +50,7 @@
 
        	  	</h:panelGrid>
        	  	<br />	
-       	  	<h:commandButton action="#{tareaBean.update(tareaBean.titulo, tareaBean.descripcion, tareaBean.estado, tareaBean.tipoTarea)}"	value="Guardar cambios">
+       	  	<h:commandButton action="#{tareaBean.update(tarea.titulo, tarea.descripcion, tarea.estado, tarea.tipoTarea)}"	value="Guardar cambios">
 			</h:commandButton>
 		</h:form>
 	</div>

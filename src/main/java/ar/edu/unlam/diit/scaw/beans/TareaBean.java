@@ -54,6 +54,7 @@ public class TareaBean implements Serializable {
 	public String editTarea(String id) {
 		Integer id2 = Integer.parseInt(id);
 		List<Tarea> list = service.editTarea(id2);
+
 		if(list.isEmpty()) {
 			return "tareas";
 		}
