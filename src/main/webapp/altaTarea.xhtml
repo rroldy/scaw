@@ -12,6 +12,11 @@
 </h:head>
 
 <h:body>
+	<!-- En caso de no tener sesion se redirige a login -->
+	<f:metadata>
+    	<f:event type="preRenderView" listener="#{usuarioBean.verificarSesion}" />
+	</f:metadata>
+	
 	<ui:include src="/header.xhtml" /> 
 
 	<h2>Crear tarea</h2>
@@ -25,7 +30,9 @@
 			<br />
 
 			<h:outputLabel for="descripcion">Descripcion:</h:outputLabel>
-			<h:inputText type="descripcion" value="#{tareaBean.descripcion}" id="descripcion"></h:inputText>
+			<h:inputTextarea cols="30" rows="5" type="descripcion" 
+					value="#{tareaBean.descripcion}" id="descripcion">
+			</h:inputTextarea>
 			<br />
 			<br />
 				

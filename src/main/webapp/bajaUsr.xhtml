@@ -13,6 +13,11 @@
 </h:head>
 
 <h:body>
+	<!-- En caso de no tener sesion se redirige a login -->
+	<f:metadata>
+    	<f:event type="preRenderView" listener="#{usuarioBean.verificarSesion}" />
+	</f:metadata>
+	
 	<ui:include src="/header.xhtml" />
 
 	<div class="panel-body">

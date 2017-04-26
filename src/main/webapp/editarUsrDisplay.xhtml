@@ -13,10 +13,14 @@
 </h:head>
 
 <h:body>
+	<!-- En caso de no tener sesion se redirige a login -->
+	<f:metadata>
+    	<f:event type="preRenderView" listener="#{usuarioBean.verificarSesion}" />
+	</f:metadata>
+	
 	<ui:include src="/header.xhtml" />
 
 	<div class="panel-body">
-	
 		<h:form id="formId" name="formId">
 			<!-- Guardo el antiguo nombre del usuario para hacer el UPDATE -->
 				<h:inputHidden value="#{usuarioBean.usuario}" id="userOld" name="formId:userOld"></h:inputHidden> 
@@ -27,9 +31,8 @@
 				<h:inputText value="#{usuarioBean.usuario}" />
 				<br />
 				<br />	
-				
 				<h:outputLabel for="tipo">Tipo:</h:outputLabel>
-				<h:selectOneMenu value = "#{usuarioBean.tipo}"> 
+				<h:selectOneMenu value = "#{usuarioBean.tipo}"> 					
 	   				<f:selectItem itemValue = "1" itemLabel = "Administrador" /> 
 	   				<f:selectItem itemValue = "2" itemLabel = "Usuario" /> 
 				</h:selectOneMenu>

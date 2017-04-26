@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<title>SCAW - Presentación de JSF</title>
+	<link rel="stylesheet" type="text/css" href="css/table-style.css" />
+</h:head>
+
+<h:body>
+	<!-- En caso de no tener sesion se redirige a login -->
+	<f:metadata>
+    	<f:event type="preRenderView" listener="#{usuarioBean.verificarSesion}" />
+	</f:metadata>
+
+	<ui:include src="/header.xhtml" /> 
+	
+	<h2>Editar tarea</h2>
+		<div class="panel-body">
+	
+		<h:form id="formId" name="formId">
+			<!-- Guardo el antiguo nombre de la tarea para hacer el UPDATE -->
+			<h:inputHidden value="#{tareaBean.id}" id="idOld" name="formId:idOld"></h:inputHidden> 
+			  
+			<h:panelGrid columns="3">											
+				<h:outputLabel for="titulo" >Titulo:</h:outputLabel>
+				<h:inputText value="#{tareaBean.titulo}" id="titulo" />
+				<br />
+				<br />	
+				
+				<h:outputLabel for="descripcion">Descripcion:</h:outputLabel>
+				<h:inputTextarea cols="30" rows="5" value="#{tareaBean.descripcion}" 
+				 id="descripcion"/> 				
+				<br />
+				<br />				
+				<h:outputLabel for="tipoTarea">Tipo:</h:outputLabel>
+				<h:selectOneMenu value = "#{tareaBean.tipoTarea}" id="tipoTarea"> 
+	   				<f:selectItem itemValue = "1" itemLabel = "Privada" /> 
+	   				<f:selectItem itemValue = "2" itemLabel = "Publica" /> 
+				</h:selectOneMenu>
+				<br />
+				<br />	
+				<h:outputLabel for="estado">Estado:</h:outputLabel>
+				<h:selectOneMenu value = "#{tareaBean.estado}" id="estado"> 
+	   				<f:selectItem itemValue = "1" itemLabel = "Pendiente" /> 
+	   				<f:selectItem itemValue = "2" itemLabel = "Finalizado" /> 
+				</h:selectOneMenu>
+				<br />
+				<br />	
+				
+
+       	  	</h:panelGrid>
+       	  	<br />	
+       	  	<h:commandButton action="#{tareaBean.update(tareaBean.titulo, tareaBean.descripcion, tareaBean.estado, tareaBean.tipoTarea)}"	value="Guardar cambios">
+			</h:commandButton>
+		</h:form>
+	</div>
+</h:body>
+</html>

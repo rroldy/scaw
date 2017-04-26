@@ -12,6 +12,11 @@
 </h:head>
 
 <h:body>
+	<!-- En caso de no tener sesion se redirige a login -->
+	<f:metadata>
+    	<f:event type="preRenderView" listener="#{usuarioBean.verificarSesion}" />
+	</f:metadata>
+	
 	<ui:include src="/header.xhtml" />				
 					
 	<h3>Listado de usuarios</h3>
@@ -45,13 +50,14 @@
 	  			/
 	  			<h:commandLink id="N" value="N" action="#{usuarioBean.changeUsrState(usuario.id,'N')}" />	  				  			
   			</h:form>   		 
-  		</h:column>	 		 		
+  		</h:column>	
+  		 			 		
 	</h:dataTable>
-	
+	<!-- 
 	<h4>
 		<h:outputLabel 	value="Usuario afecado: #{usuarioBean.usuario}" 
 		rendered="#{usuarioBean.usuario != NULL}" /> 	
 	</h4>
-
+	 -->
 </h:body>
 </html>

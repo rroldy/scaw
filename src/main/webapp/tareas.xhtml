@@ -58,15 +58,11 @@
 	   	<h:column>
 	   		<f:facet name="header">Accion</f:facet>
 			<h:form>
-				<h:commandLink value="Borrar" id="borrar" action="#{tareaBean.deleteTarea(tarea.id)}" />	  								
-			</h:form>
+				<h:commandLink value="Borrar" id="borrar" action="#{tareaBean.deleteTarea(tarea.id)}" /> |	  								
+				<h:commandLink value="Editar" id="editar" action="#{tareaBean.editTarea1(tarea.id, tarea.titulo, tarea.descripcion, tarea.tipoTarea, tarea.estado)}" />	  								
+			</h:form> 
 		</h:column>
-		<h:column>
-	   		<f:facet name="header">Accion</f:facet>
-			<h:form>
-				<h:commandLink value="Editar" id="editar" action="#{tareaBean.editTarea(tarea.id)}" />	  								
-			</h:form>
-		</h:column>
+		
 	</h:dataTable>
 </h:body>
 </html>

@@ -52,10 +52,9 @@ public class TareaDaoImpl implements TareaDao {
 	@Override
 	public void update(String id, String titulo,String descripcion, Integer tipoTarea, Integer estado) {
 
-		String sql = "UPDATE TAREA SET titulo = :titulo, descripcion = :descripcion, estado = :estado,tipo = :tipoTarea WHERE id = :id";
-		Integer id2 = Integer.parseInt(id);
+		String sql = "UPDATE TAREA SET TITULO = :titulo, DESCRIPCION = :descripcion, ESTADO = :estado, TIPOTAREA = :tipoTarea WHERE ID = :id";
 		Map<String, Object> params = new HashMap<String, Object>();
-		params.put("id", id2);
+		params.put("id", Integer.parseInt(id));
 		params.put("titulo", titulo);
 		params.put("descripcion", descripcion);
 		params.put("tipoTarea", tipoTarea);

@@ -1,5 +1,6 @@
 package ar.edu.unlam.diit.scaw.beans;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 
@@ -14,6 +15,8 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import ar.edu.unlam.diit.scaw.entities.Tarea;
 import ar.edu.unlam.diit.scaw.entities.Usuario;
 import ar.edu.unlam.diit.scaw.services.UsuarioService;
 
@@ -68,6 +71,10 @@ public class UsuarioBean implements Serializable {
 			return "editarUsr";
 		}
 		
+		this.setUsuario(nombreUsr);
+		this.setAprobado(list.get(0).getAprobado());
+		this.setTipo(list.get(0).getTipo());		
+			
 		return "editarUsrDisplay";
 	}
 	
@@ -147,9 +154,6 @@ public class UsuarioBean implements Serializable {
 			FacesContext context = FacesContext.getCurrentInstance();
 			HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
 			
-			//request.login(usrName, password);
-			//HttpSession session = request.getSession(true);
-			
 			//Se crea una nueva sesión para este usuario
 			Usuario usuario = new Usuario();
 			usuario.setId(list.get(0).getId());
@@ -164,7 +168,6 @@ public class UsuarioBean implements Serializable {
 			session.setAttribute("aprobado", usuario.getAprobado());
 			
 			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario", usuario);
-			//FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put(key,object);
 			
 			if (usuario.getTipo() == 1) { 
 				return "usuarios";	// Administrador -> muestro usuarios					
@@ -180,24 +183,19 @@ public class UsuarioBean implements Serializable {
 		FacesContext context = FacesContext.getCurrentInstance();
 		HttpServletRequest request = (HttpServletRequest)context.getExternalContext().getRequest();
 	
-		//try {
-			request.logout();
-		//} catch (ServletException e) {
-			// TODO Auto-generated catch block
-			//e.printStackTrace();
-	//	}
+		request.logout();
 		
 		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
 		return "login";
 	}
 	
 	//este metodo se debe incluir en las vistas para resstringir acceso no autorizado
-	public boolean verificarSesion(){
-		
-		if(FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario") != null)
-			return true;
-		else 
-			return false;
+	public void verificarSesion() throws IOException{
+		//TODO: verificar el tipo usuario -> comun/adm -> para ver en que pagina intenta acceder
+		if(FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario") == null) {
+
+			FacesContext.getCurrentInstance().getExternalContext().redirect("login.xhtml");
+		}
 	}
 
 }
