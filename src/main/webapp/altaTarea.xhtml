@@ -22,27 +22,24 @@
 	<h2>Crear tarea</h2>
 	
 	<h:form>
-		<h:panelGrid columns="3">
-
+		<!-- Guardo el id del usuario que la crea -->
+		<h:inputHidden value="#{sessionScope.usuario.id}" id="usuarioCreador" name="formId:usuarioCreador"></h:inputHidden>
+		
+		<h:panelGrid columns="2" border="0">	
+						
 			<h:outputLabel for="titulo">Titulo</h:outputLabel>
 			<h:inputText value="#{tareaBean.titulo}" id="titulo"></h:inputText>
-			<br />
-			<br />
 
 			<h:outputLabel for="descripcion">Descripcion:</h:outputLabel>
 			<h:inputTextarea cols="30" rows="5" type="descripcion" 
 					value="#{tareaBean.descripcion}" id="descripcion">
 			</h:inputTextarea>
-			<br />
-			<br />
 				
 			<h:outputLabel for="estado">Estado:</h:outputLabel>
 			<h:selectOneMenu value = "#{tareaBean.estado}"> 
    				<f:selectItem itemValue = "1" itemLabel = "Pendiente" /> 
    				<f:selectItem itemValue = "2" itemLabel = "Finalizado" /> 
 			</h:selectOneMenu>
-			<br />
-			<br />
 			
 			<h:outputLabel for="tipoTarea">Privacidad:</h:outputLabel>
 			<h:selectOneMenu value = "#{tareaBean.tipoTarea}"> 
@@ -51,12 +48,11 @@
 			</h:selectOneMenu>
 			<br />
 			<br />
-
-			<h:commandButton action="#{tareaBean.save}" value="Save">
-			</h:commandButton>
 				
 		</h:panelGrid>
-			
+		<h:commandButton action="#{tareaBean.save(sessionScope.usuario.id)}" value="Save">
+		</h:commandButton>
+						
 	</h:form>
 </h:body>
 </html>

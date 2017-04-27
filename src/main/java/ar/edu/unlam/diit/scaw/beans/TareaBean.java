@@ -29,7 +29,7 @@ public class TareaBean implements Serializable {
 	private Integer estado = null;
 	private Integer creado_por = null;
 	private Integer tipoTarea = null;
-	//private Integer usuarioCreador = null;
+	private String usuarioCreador = null;
 	
 	ApplicationContext context = new ClassPathXmlApplicationContext(new String[] {"beans.xml"});
 	TareaService service = (TareaService) context.getBean("tareaService");
@@ -38,10 +38,10 @@ public class TareaBean implements Serializable {
 		super();
 	}
 	
-	public String save() {
+	public String save(String creadoPor) {
 		
 		Tarea tarea = buildTarea();
-		
+		tarea.setCreadoPor(Integer.parseInt(creadoPor));
 		service.save(tarea);
 		
 		return "tareas";
@@ -53,8 +53,6 @@ public class TareaBean implements Serializable {
 		return "tareas";
 	}
 	
-	//@Named(value = "tareaBean")
-	//@RequestScoped	
 	public String editTarea(String id) {
 		List<Tarea> list = service.editTarea(Integer.parseInt(id));
 
@@ -71,12 +69,6 @@ public class TareaBean implements Serializable {
 	}
 	
 	public String editTarea1(String id, String titulo, String descripcion, String estado, String tipo) {		
-		/*String id = (String)ae.getComponent().getAttributes().get("tarea");
-		String titulo = (String)ae.getComponent().getAttributes().get("tarea.titulo");
-		String descripcion = (String)ae.getComponent().getAttributes().get("tarea.descripcion");
-		String estado = (String)ae.getComponent().getAttributes().get("tareaBean.estado");
-		String tipo = (String)ae.getComponent().getAttributes().get("tarea.tipo");
-		*/
 		this.setId(Integer.parseInt(id));
 		this.setTitulo(titulo);
 		this.setDescripcion(descripcion);
@@ -108,6 +100,7 @@ public class TareaBean implements Serializable {
 		tarea.setEstado(this.estado);
 		tarea.setCreadoPor(this.creado_por);
 		tarea.setTipoTarea(this.tipoTarea);
+		tarea.setUsuarioCreador(this.usuarioCreador);
 		
 		return tarea;
 	}
@@ -157,5 +150,13 @@ public class TareaBean implements Serializable {
 
 	public void setTipoTarea(Integer tipoTarea) {
 		this.tipoTarea = tipoTarea;
+	}
+
+	public String getUsuarioCreador() {
+		return usuarioCreador;
+	}
+
+	public void setUsuarioCreador(String usuarioCreador) {
+		this.usuarioCreador = usuarioCreador;
 	}	
 }

@@ -77,8 +77,8 @@ public class TareaDaoImpl implements TareaDao {
 	public List<Tarea> findAll() {
 		Map<String, Object> params = new HashMap<String, Object>();
 
-		//String sql = "SELECT T.*, U.USUARIO FROM TAREA T INNER JOIN USUARIO U ON U.ID = T.CREADO_POR";
-		String sql = "SELECT * FROM TAREA";
+		String sql = "SELECT T.*, U.USUARIO FROM TAREA T INNER JOIN USUARIO U ON U.ID = T.CREADO_POR";
+		//String sql = "SELECT * FROM TAREA";
 		
 		List<Tarea> result = jdbcTemplate.query(sql, params, new TareaMapper());
 
@@ -103,7 +103,7 @@ public class TareaDaoImpl implements TareaDao {
 			tarea.setDescripcion(rs.getString("descripcion"));
 			tarea.setEstado(rs.getInt("estado"));
 			tarea.setCreadoPor(rs.getInt("creado_por"));
-			//tarea.setUsuarioCreador(rs.getString("usuario"));
+			tarea.setUsuarioCreador(rs.getString("usuario"));
 			tarea.setTipoTarea(rs.getInt("tipoTarea"));
 			return tarea;
 		}

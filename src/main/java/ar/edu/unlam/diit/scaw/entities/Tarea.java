@@ -13,7 +13,7 @@ import java.io.Serializable;
 		private Integer estado;
 		private Integer creado_por;
 		private Integer tipoTarea;
-		//private String usuarioCreador;
+		private String usuarioCreador;
 
 		public Tarea() {
 		}
@@ -70,12 +70,12 @@ import java.io.Serializable;
 		public void setTipoTarea(Integer tipoTarea) {
 			this.tipoTarea = tipoTarea;
 		}
-		/*
+		
 		public String getUsuarioCreador() {
 			return usuarioCreador;
 		}
 
 		public void setUsuarioCreador(String usuarioCreador) {
 			this.usuarioCreador = usuarioCreador;
-		}	*/
+		}	
 	}
