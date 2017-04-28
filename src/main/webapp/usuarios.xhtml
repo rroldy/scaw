@@ -51,6 +51,14 @@
 	  			<h:commandLink id="N" value="N" action="#{usuarioBean.changeUsrState(usuario.id,'N')}" />	  				  			
   			</h:form>   		 
   		</h:column>	
+  		
+  		<h:column>
+			<f:facet name="header">Accion</f:facet>
+			<h:form>
+				<h:commandLink value="Editar" id="editar" action="#{usuarioBean.editUsr(usuario.usuario)}"/>	|	  								
+				<h:commandLink value="Borrar" id="borrar" action="#{usuarioBean.deleteUsr(usuario.usuario)}" />
+			</h:form> 
+		</h:column>	
   		 			 		
 	</h:dataTable>
 	<!-- 

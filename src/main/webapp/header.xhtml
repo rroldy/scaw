@@ -14,8 +14,7 @@
 </h:head>
 
 <h:body>	
-	<!-- Menu administrador -->
-    
+	<!-- Menu administrador -->   
     <h:panelGroup rendered="#{sessionScope.usuario.tipo == 1}">
    		<h:panelGrid columns="1" border="1">
 			<h:outputLabel align="center" id="adminNameLabel" 
@@ -29,8 +28,8 @@
 				<li>
 					<h:link value="Listado usuarios" outcome="usuarios" /> |
 		  			<h:link value="Alta usuario" outcome="altaUsr" /> | 
-		  			<h:link value="Baja usuario" outcome="bajaUsr" /> | 
-		  			<h:link value="Editar usuario" outcome="editarUsr" /> |
+		  			<!--  <h:link value="Baja usuario" outcome="bajaUsr" /> | --> 
+		  			<!--  <h:link value="Editar usuario" outcome="editarUsr" /> | -->
 		  			<h:link value="Listado tareas" outcome="tareas" /> |
 		  			<h:link value="Crear tarea" outcome="altaTarea" /> |
 		  			<!--  <h:link value="Editar tarea" outcome="editarTarea" /> | -->  		
