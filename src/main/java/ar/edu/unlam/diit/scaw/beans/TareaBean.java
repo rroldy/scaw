@@ -22,11 +22,11 @@ public class TareaBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private Integer id = null;
-	private String descripcion = null;
 	private String titulo = null;
+	private String descripcion = null;
+	private Integer tipoTarea = null;
 	private Integer estado = null;
 	private Integer creado_por = null;
-	private Integer tipoTarea = null;
 	private String usuarioCreador = null;
 	
 	ApplicationContext context = new ClassPathXmlApplicationContext(new String[] {"beans.xml"});
@@ -52,12 +52,12 @@ public class TareaBean implements Serializable {
 	}
 		
 	// Para la edicion de una tarea
-	public String editTarea(String id, String titulo, String descripcion, String estado, String tipo, String usrCreador) {		
+	public String editTarea(String id, String titulo, String descripcion, String tipo, String estado, String usrCreador) {		
 		this.setId(Integer.parseInt(id));
 		this.setTitulo(titulo);
-		this.setDescripcion(descripcion);
-		this.setEstado(Integer.parseInt(estado));
+		this.setDescripcion(descripcion);		
 		this.setTipoTarea(Integer.parseInt(tipo));
+		this.setEstado(Integer.parseInt(estado));
 		this.setUsuarioCreador(usrCreador);
 		
 		return "editarTareaDisplay";
@@ -73,8 +73,8 @@ public class TareaBean implements Serializable {
 		this.setId(list.get(0).getId());
 		this.setTitulo(list.get(0).getTitulo());
 		this.setDescripcion(list.get(0).getDescripcion());
-		this.setEstado(list.get(0).getEstado());
 		this.setTipoTarea(list.get(0).getTipoTarea());
+		this.setEstado(list.get(0).getEstado());		
 		this.setUsuarioCreador(list.get(0).getUsuarioCreador());
 		
 		return "verTarea";
@@ -108,9 +108,9 @@ public class TareaBean implements Serializable {
 		tarea.setId(this.id);
 		tarea.setTitulo(this.titulo);
 		tarea.setDescripcion(this.descripcion);
-		tarea.setEstado(this.estado);
-		tarea.setCreadoPor(this.creado_por);
 		tarea.setTipoTarea(this.tipoTarea);
+		tarea.setEstado(this.estado);
+		tarea.setCreadoPor(this.creado_por);		
 		tarea.setUsuarioCreador(this.usuarioCreador);
 		
 		return tarea;

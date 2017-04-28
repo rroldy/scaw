@@ -25,18 +25,20 @@ public class TareaDaoImpl implements TareaDao {
 	@Override
 	public void save(Tarea tarea) {
 
-		String sql = "INSERT INTO TAREA (id,titulo, descripcion, estado, creado_por,tipoTarea) VALUES (:id, :titulo, :descripcion, :estado, :creado_por, :tipoTarea)";
+		String sql = "INSERT INTO TAREA (id, titulo, descripcion, tipoTarea, estado, creado_por) VALUES (:id, :titulo, :descripcion, :tipoTarea, :estado, :creado_por)";
 
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("id", tarea.getId());
 		params.put("titulo", tarea.getTitulo());
 		params.put("descripcion", tarea.getDescripcion());
+		params.put("tipoTarea", tarea.getTipoTarea());
 		params.put("estado", tarea.getEstado());
 		params.put("creado_por", tarea.getCreadoPor());
-		params.put("tipoTarea", tarea.getTipoTarea());
+		
 		jdbcTemplate.update(sql, params);
 
 	}
+	
 	@Override
 	public List<Tarea> searchTarea(Integer id) {		
 		//String sql = "SELECT * FROM TAREA WHERE ID = :id";
@@ -51,17 +53,17 @@ public class TareaDaoImpl implements TareaDao {
 	}
 	
 	@Override
-	public void update(String id, String titulo,String descripcion, Integer tipoTarea, Integer estado) {
+	public void update(String id, String titulo, String descripcion, Integer tipoTarea, Integer estado) {
 
-		String sql = "UPDATE TAREA SET TITULO = :titulo, DESCRIPCION = :descripcion, ESTADO = :estado, TIPOTAREA = :tipoTarea WHERE ID = :id";
+		String sql = "UPDATE TAREA SET TITULO = :titulo, DESCRIPCION = :descripcion, TIPOTAREA = :tipoTarea, ESTADO = :estado WHERE ID = :id";
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("id", Integer.parseInt(id));
 		params.put("titulo", titulo);
 		params.put("descripcion", descripcion);
 		params.put("tipoTarea", tipoTarea);
-		params.put("estado", estado);
+		params.put("estado", estado);		
+		
 		jdbcTemplate.update(sql, params);
-
 	}
 	
 	@Override
@@ -114,10 +116,11 @@ public class TareaDaoImpl implements TareaDao {
 			tarea.setId(rs.getInt("id"));
 			tarea.setTitulo(rs.getString("titulo"));
 			tarea.setDescripcion(rs.getString("descripcion"));
+			tarea.setTipoTarea(rs.getInt("tipoTarea"));
 			tarea.setEstado(rs.getInt("estado"));
 			tarea.setCreadoPor(rs.getInt("creado_por"));
 			tarea.setUsuarioCreador(rs.getString("usuario"));
-			tarea.setTipoTarea(rs.getInt("tipoTarea"));
+			
 			return tarea;
 		}
 	}
