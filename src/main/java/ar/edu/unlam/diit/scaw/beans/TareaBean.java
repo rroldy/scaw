@@ -50,43 +50,56 @@ public class TareaBean implements Serializable {
 	
 		return "tareas";
 	}
+		
+	// Para la edicion de una tarea
+	public String editTarea(String id, String titulo, String descripcion, String estado, String tipo, String usrCreador) {		
+		this.setId(Integer.parseInt(id));
+		this.setTitulo(titulo);
+		this.setDescripcion(descripcion);
+		this.setEstado(Integer.parseInt(estado));
+		this.setTipoTarea(Integer.parseInt(tipo));
+		this.setUsuarioCreador(usrCreador);
+		
+		return "editarTareaDisplay";
+	}
 	
-	public String editTarea(String id) {
-		List<Tarea> list = service.editTarea(Integer.parseInt(id));
+	// Visualizar tarea
+	public String viewTarea(String id) {	
+		List<Tarea> list = service.searchTarea(Integer.parseInt(id));
 
 		if(list.isEmpty()) {
-			return "editarTarea";
+			return "tareas";
 		}
 		this.setId(list.get(0).getId());
 		this.setTitulo(list.get(0).getTitulo());
 		this.setDescripcion(list.get(0).getDescripcion());
 		this.setEstado(list.get(0).getEstado());
 		this.setTipoTarea(list.get(0).getTipoTarea());
-				
-		return "editarTareaDisplay";
+		this.setUsuarioCreador(list.get(0).getUsuarioCreador());
+		
+		return "verTarea";
 	}
 	
-	public String editTarea1(String id, String titulo, String descripcion, String estado, String tipo) {		
-		this.setId(Integer.parseInt(id));
-		this.setTitulo(titulo);
-		this.setDescripcion(descripcion);
-		this.setEstado(Integer.parseInt(estado));
-		this.setTipoTarea(Integer.parseInt(tipo));
-		
-		return "editarTareaDisplay";
-	}
-
-	public String update(String titulo, String descripcion, Integer tipoTarea, Integer estado) {
+	// Actualizar tarea
+	public String update(String titulo, String descripcion, Integer tipoTarea, Integer estado) {	
 		
 		ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
 	    String idTarea = ec.getRequestParameterMap().get("formId:idOld");
 		
-		service.update(idTarea, titulo, descripcion, tipoTarea,estado);
+		service.update(idTarea, titulo, descripcion, tipoTarea, estado);
 		
 		return "tareas";
 	}
-	public List<Tarea> getFindAll() {
+	
+	// Busca todas las tareas guardadas
+	public List<Tarea> getFindAll() {		
 		List<Tarea> list = service.findAll();
+		return list;
+	}
+	
+	// Busca solo las tareas publicas (para los usuarios no registrados)
+	public List<Tarea> getFindPublic() {	
+		List<Tarea> list = service.findPublic();
 		return list;
 	}
 	

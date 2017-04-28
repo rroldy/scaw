@@ -23,7 +23,7 @@
 	<div class="panel-body">
 		<h:form>	
 			<h3>Editar tarea</h3>
-
+			
 			<h:panelGrid columns="3">
 				<h:outputLabel for="usuario">ID Tarea:</h:outputLabel>
 				<h:inputText value="#{tareaBean.id}" id="tarea"></h:inputText>				
@@ -31,7 +31,7 @@
 			<br />
 				
 			<h:commandButton 
-				action="#{tareaBean.editTarea(tareaBean.id)}" value="Buscar">
+				action="#{tareaBean.editTarea1(tareaBean.id)}" value="Buscar">
 			</h:commandButton>
 							
 		</h:form>

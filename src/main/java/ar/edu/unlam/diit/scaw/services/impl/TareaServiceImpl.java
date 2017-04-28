@@ -21,8 +21,8 @@ public class TareaServiceImpl implements TareaService {
 	}
 
 	//@Override
-	public List<Tarea> editTarea(Integer id	) {
-		return tareaDao.editTarea(id);
+	public List<Tarea> searchTarea(Integer id	) {
+		return tareaDao.searchTarea(id);
 	}
 	@Override
 	public void update(String id,String titulo, String descripcion, Integer tipoTarea, Integer estado) {
@@ -32,7 +32,12 @@ public class TareaServiceImpl implements TareaService {
 	public List<Tarea> findAll() {
 		return tareaDao.findAll();
 	}
-
+	
+	@Override
+	public List<Tarea> findPublic() {
+		return tareaDao.findPublic();
+	}
+	
 	public TareaDao getTareaDao() {
 		return tareaDao;
 	}

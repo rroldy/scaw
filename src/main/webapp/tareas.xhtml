@@ -21,158 +21,146 @@
 	<h:panelGroup rendered="#{sessionScope.usuario.tipo == 1}"> 
 		<h:dataTable value="#{tareaBean.findAll}" var="tarea"
 			styleClass="order-table" headerClass="order-table-header"
-			rowClasses="order-table-odd-row,order-table-even-row">
-			
-			  
+			rowClasses="order-table-odd-row,order-table-even-row">			
+			<!--    
 			<h:column>
 				<f:facet name="header">Id de tarea</f:facet>    				
 	      		#{tarea.id}
-	  		 </h:column>
+	  		</h:column>
+	  		--> 
+			<h:column>
+				<f:facet name="header">Autor</f:facet>
+	    	  	#{tarea.usuarioCreador} 	    	  				
+		   	</h:column>
 			<h:column>
 				<f:facet name="header">Titulo de tarea</f:facet>    				
 	      		#{tarea.titulo}
-	  		 </h:column>
-	  		 
-	  		 <h:column>
+	  		</h:column>	  		 
+	  		<h:column>
 				<f:facet name="header">Descripcion</f:facet>
 	      		#{tarea.descripcion}
-	   		</h:column>
-	
+	   		</h:column>	
+			<h:column>
+				<f:facet name="header">Tipo</f:facet>
+				<h:outputLabel 	value="Privada" 
+								rendered="#{tarea.tipoTarea == 1}" />
+				<h:outputLabel 	value="Publica" 
+								rendered="#{tarea.tipoTarea == 2}" />
+		   	</h:column>
 			<h:column>
 				<f:facet name="header">Estado</f:facet>
 				<h:outputLabel 	value="Pendiente" 
 								rendered="#{tarea.estado == 1}" />
 				<h:outputLabel 	value="Finalizada" 
 								rendered="#{tarea.estado == 2}" />
-		   </h:column>
-		   <h:column>
-				<f:facet name="header">Creado Por</f:facet>
-	    	  	#{tarea.usuarioCreador} 
-	    	  				
-		   </h:column>
-		   	
-		   	<h:column>
-				<f:facet name="header">Tipo</f:facet>
-				<h:outputLabel 	value="Privada" 
-								rendered="#{tarea.tipoTarea == 1}" />
-				<h:outputLabel 	value="Publica" 
-								rendered="#{tarea.tipoTarea == 2}" />
-		   	</h:column>	 
+		   	</h:column>		   		 
 		   	<h:column>
 		   		<f:facet name="header">Accion</f:facet>
 				<h:form>
-					<h:commandLink value="Borrar" id="borrar" action="#{tareaBean.deleteTarea(tarea.id)}" /> |	  								
-					<h:commandLink value="Editar" id="editar" action="#{tareaBean.editTarea1(tarea.id, tarea.titulo, tarea.descripcion, tarea.tipoTarea, tarea.estado)}"/>	  								
+					<h:commandLink value="Ver" id="ver" action="#{tareaBean.viewTarea(tarea.id)}"/>	|						  								
+					<h:commandLink value="Editar" id="editar" action="#{tareaBean.editTarea(tarea.id, tarea.titulo, tarea.descripcion, tarea.tipoTarea, tarea.estado, tarea.usuarioCreador)}"/>	|	  								
+					<h:commandLink value="Borrar" id="borrar" action="#{tareaBean.deleteTarea(tarea.id)}" />
 				</h:form> 
-			</h:column>
-			
+			</h:column>			
 		</h:dataTable>
 	</h:panelGroup>
-	
-	
+		
 	<!-- Panel de tareas para el usuario -->
 	
 	<h:panelGroup rendered="#{sessionScope.usuario.tipo == 2}"> 
 		<h:dataTable value="#{tareaBean.findAll}" var="tarea"
 			styleClass="order-table" headerClass="order-table-header"
 			rowClasses="order-table-odd-row,order-table-even-row">
-			
+			<!--  	
 			<h:column>
 				<f:facet name="header">Id de tarea</f:facet>    				
 	      		#{tarea.id}
-	  		 </h:column>
+	  		</h:column>
+	  		-->
+			<h:column>
+				<f:facet name="header">Autor</f:facet>
+	    	  	#{tarea.usuarioCreador} 	    	  				
+		   	</h:column>
 			<h:column>
 				<f:facet name="header">Titulo de tarea</f:facet>    				
 	      		#{tarea.titulo}
-	  		 </h:column>
-	  		 
-	  		 <h:column>
+	  		</h:column> 
+	  		<h:column>
 				<f:facet name="header">Descripcion</f:facet>
 	      		#{tarea.descripcion}
 	   		</h:column>
-	
+			<h:column>
+				<f:facet name="header">Tipo</f:facet>
+				<h:outputLabel 	value="Privada" 
+								rendered="#{tarea.tipoTarea == 1}" />
+				<h:outputLabel 	value="Publica" 
+								rendered="#{tarea.tipoTarea == 2}" />
+		   	</h:column>
 			<h:column>
 				<f:facet name="header">Estado</f:facet>
 				<h:outputLabel 	value="Pendiente" 
 								rendered="#{tarea.estado == 1}" />
 				<h:outputLabel 	value="Finalizada" 
 								rendered="#{tarea.estado == 2}" />
-		   </h:column>
-		   <h:column>
-				<f:facet name="header">Creado Por</f:facet>
-	    	  	#{tarea.usuarioCreador} 
-	    	  				
-		   </h:column>
-		   	
-		   	<h:column>
-				<f:facet name="header">Tipo</f:facet>
-				<h:outputLabel 	value="Privada" 
-								rendered="#{tarea.tipoTarea == 1}" />
-				<h:outputLabel 	value="Publica" 
-								rendered="#{tarea.tipoTarea == 2}" />
-		   	</h:column>	 
+		   	</h:column>		   		 
 		   	<h:column>
 		   		<f:facet name="header">Accion</f:facet>
 		   		<!-- Boton editar: tarea publica o tarea privada y usuario en sesion == usuario creador tarea -->
 		   		<h:panelGroup    
 		   			rendered="#{(tarea.tipoTarea == 1 and sessionScope.usuario.usuario == tarea.usuarioCreador) or tarea.tipoTarea == 2}">
-					<h:form>	  								
+					<h:form>
+						<h:commandLink value="Ver" id="ver" action="#{tareaBean.viewTarea(tarea.id)}"/>	|	  								
 						<h:commandLink value="Editar" id="editar" 
-						action="#{tareaBean.editTarea1(tarea.id, tarea.titulo, tarea.descripcion, tarea.tipoTarea, tarea.estado)}"/>	  								
+						action="#{tareaBean.editTarea(tarea.id, tarea.titulo, tarea.descripcion, tarea.tipoTarea, tarea.estado, tarea.usuarioCreador)}"/>	  								
 					</h:form> 
 				</h:panelGroup>
-			</h:column>
-			
+			</h:column>			
 		</h:dataTable>
 	</h:panelGroup>
 	
 	<!-- Panel de tareas para el usuario no registrado -->
 	
 	<h:panelGroup rendered="#{sessionScope.usuario.tipo == NULL}"> 	
-		<h:dataTable value="#{tareaBean.findAll}" var="tarea"
+		<h:dataTable value="#{tareaBean.findPublic}" var="tarea"
 			styleClass="order-table" headerClass="order-table-header"
 			rowClasses="order-table-odd-row,order-table-even-row">								
+			<!--  
 			<h:column>
 				<f:facet name="header">Id de tarea</f:facet>
-				<h:panelGroup rendered="#{tarea.tipoTarea == 2}">		
-		      		#{tarea.id}
-		    	</h:panelGroup>
-		  	</h:column>
+				#{tarea.id}
+		    </h:column>
+		    -->
+		    <h:column>
+				<f:facet name="header">Autor</f:facet>
+	    	  	#{tarea.usuarioCreador} 	    	  				
+		   	</h:column>
 			<h:column>
 				<f:facet name="header">Titulo de tarea</f:facet>
-				<h:panelGroup rendered="#{tarea.tipoTarea == 2}">					    				
-		      		#{tarea.titulo}
-		    	</h:panelGroup>
+				#{tarea.titulo}
 		  	</h:column>
 		  	<h:column>
 		  		<f:facet name="header">Descripcion</f:facet>
-		  		<h:panelGroup rendered="#{tarea.tipoTarea == 2}">
-					#{tarea.descripcion}
-		      	</h:panelGroup>	
-		   	</h:column>
+				#{tarea.descripcion}
+		   	</h:column>			
+			<h:column>
+				<f:facet name="header">Tipo</f:facet> 
+					<h:outputLabel 	value="Publica" />
+			</h:column>
 			<h:column>
 				<f:facet name="header">Estado</f:facet>
-				<h:panelGroup rendered="#{tarea.tipoTarea == 2}">					
 					<h:outputLabel 	value="Pendiente" 
 									rendered="#{tarea.estado == 1}" />
 					<h:outputLabel 	value="Finalizada" 
 									rendered="#{tarea.estado == 2}" />
-				</h:panelGroup>				
 		   	</h:column>
 		   	<h:column>
-		   		<f:facet name="header">Creado Por</f:facet>
-				<h:panelGroup rendered="#{tarea.tipoTarea == 2}">
-					#{tarea.usuarioCreador} 
-		    	</h:panelGroup>			
-			</h:column>
-			<h:column>
-				<f:facet name="header">Tipo</f:facet> 
-				<h:panelGroup rendered="#{tarea.tipoTarea == 2}">					
-					<h:outputLabel 	value="Publica" />
-				</h:panelGroup>
-			</h:column>
-		</h:dataTable>
-		
+		   		<f:facet name="header">Accion</f:facet>
+	   			<h:form>	
+	   				<h:commandLink value="Ver" id="ver" action="#{tareaBean.viewTarea(tarea.id)}"/>
+	   			</h:form>			  													
+			</h:column>			
+		</h:dataTable>		
 	</h:panelGroup>	
+	
 </h:body>
 </html>

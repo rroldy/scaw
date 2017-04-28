@@ -10,10 +10,12 @@ public interface TareaService {
 	
 	public void deleteTarea(Integer id);
 	
-	public List<Tarea> editTarea(Integer id);
+	public List<Tarea> searchTarea(Integer id);
 
 	public List<Tarea> findAll();
 	
+	public List<Tarea> findPublic();
+	
 	public void update(String id, String titulo, String descripcion, Integer tipoTarea, Integer estado);
-
+	
 }

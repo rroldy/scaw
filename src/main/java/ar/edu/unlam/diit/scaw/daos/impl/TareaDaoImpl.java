@@ -38,8 +38,9 @@ public class TareaDaoImpl implements TareaDao {
 
 	}
 	@Override
-	public List<Tarea> editTarea(Integer id) {		
-		String sql = "SELECT * FROM TAREA WHERE ID = :id";
+	public List<Tarea> searchTarea(Integer id) {		
+		//String sql = "SELECT * FROM TAREA WHERE ID = :id";
+		String sql = "SELECT T.*, U.USUARIO FROM TAREA T INNER JOIN USUARIO U ON U.ID = T.CREADO_POR WHERE ID = :id";
 		
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("id", id);
@@ -78,6 +79,18 @@ public class TareaDaoImpl implements TareaDao {
 		Map<String, Object> params = new HashMap<String, Object>();
 
 		String sql = "SELECT T.*, U.USUARIO FROM TAREA T INNER JOIN USUARIO U ON U.ID = T.CREADO_POR";
+		//String sql = "SELECT * FROM TAREA";
+		
+		List<Tarea> result = jdbcTemplate.query(sql, params, new TareaMapper());
+
+		return result;
+	}
+	
+	@Override
+	public List<Tarea> findPublic() {
+		Map<String, Object> params = new HashMap<String, Object>();
+
+		String sql = "SELECT T.*, U.USUARIO FROM TAREA T INNER JOIN USUARIO U ON U.ID = T.CREADO_POR WHERE T.TIPOTAREA = 2";
 		//String sql = "SELECT * FROM TAREA";
 		
 		List<Tarea> result = jdbcTemplate.query(sql, params, new TareaMapper());
