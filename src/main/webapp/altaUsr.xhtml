@@ -57,13 +57,10 @@
    					<f:selectItem itemValue = "S" itemLabel = "S" /> 
    					<f:selectItem itemValue = "N" itemLabel = "N" /> 
 				</h:selectOneMenu>
-				<br />
-				<br />
-
-				<h:commandButton action="#{usuarioBean.save}" value="Save">
-				</h:commandButton>
-				
 			</h:panelGrid>
+			<br />
+			<h:commandButton action="#{usuarioBean.save}" value="Save">
+			</h:commandButton> | <h:link value="Volver" outcome="usuarios" />
 		</h:form>
 	</div>
 	

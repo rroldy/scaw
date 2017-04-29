@@ -47,11 +47,10 @@
    				<f:selectItem itemValue = "2" itemLabel = "Publica" /> 
 			</h:selectOneMenu>
 			<br />
-			<br />
 				
 		</h:panelGrid>
 		<h:commandButton action="#{tareaBean.save(sessionScope.usuario.id)}" value="Save">
-		</h:commandButton>
+		</h:commandButton> | <h:link value="Volver" outcome="tareas" />
 						
 	</h:form>
 </h:body>
