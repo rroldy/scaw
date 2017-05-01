@@ -197,5 +197,14 @@ public class UsuarioBean implements Serializable {
 			FacesContext.getCurrentInstance().getExternalContext().redirect("login.xhtml");
 		}
 	}
+	
+	//este metodo se debe incluir en las vistas para resstringir acceso a usuarios no administradores
+	public void verificarUsuario() throws IOException{
+		//TODO: verificar el tipo usuario -> comun/adm -> para ver en que pagina intenta acceder
+		if(!(FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("tipo").toString().contentEquals("1"))) {
+			// Si el usuario esta registrado y no es administrador es redirigido a la pag de tareas 
+			FacesContext.getCurrentInstance().getExternalContext().redirect("tareas.xhtml");
+		}
+	}
 
 }

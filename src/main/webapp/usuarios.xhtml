@@ -12,9 +12,11 @@
 </h:head>
 
 <h:body>
-	<!-- En caso de no tener sesion se redirige a login -->
 	<f:metadata>
+    	<!-- En caso de no tener sesion se redirige a login -->
     	<f:event type="preRenderView" listener="#{usuarioBean.verificarSesion}" />
+    	<!-- En caso de no tener permisos de admin se redirige a tareas -->
+    	<f:event type="preRenderView" listener="#{usuarioBean.verificarUsuario}" />
 	</f:metadata>
 	
 	<ui:include src="/header.xhtml" />				
