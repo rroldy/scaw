@@ -10,13 +10,11 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import ar.edu.unlam.diit.scaw.entities.Tarea;
 import ar.edu.unlam.diit.scaw.entities.Usuario;
 import ar.edu.unlam.diit.scaw.services.UsuarioService;
 
@@ -191,16 +189,13 @@ public class UsuarioBean implements Serializable {
 	
 	//este metodo se debe incluir en las vistas para resstringir acceso no autorizado
 	public void verificarSesion() throws IOException{
-		//TODO: verificar el tipo usuario -> comun/adm -> para ver en que pagina intenta acceder
 		if(FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario") == null) {
-
 			FacesContext.getCurrentInstance().getExternalContext().redirect("login.xhtml");
 		}
 	}
 	
 	//este metodo se debe incluir en las vistas para resstringir acceso a usuarios no administradores
 	public void verificarUsuario() throws IOException{
-		//TODO: verificar el tipo usuario -> comun/adm -> para ver en que pagina intenta acceder
 		if(!(FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("tipo").toString().contentEquals("1"))) {
 			// Si el usuario esta registrado y no es administrador es redirigido a la pag de tareas 
 			FacesContext.getCurrentInstance().getExternalContext().redirect("tareas.xhtml");

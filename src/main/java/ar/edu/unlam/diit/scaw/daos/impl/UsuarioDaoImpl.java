@@ -2,7 +2,6 @@ package ar.edu.unlam.diit.scaw.daos.impl;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Types;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
