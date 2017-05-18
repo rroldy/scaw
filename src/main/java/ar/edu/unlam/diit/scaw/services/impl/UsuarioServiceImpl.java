@@ -29,8 +29,8 @@ public class UsuarioServiceImpl implements UsuarioService {
 	}
 	
 	//@Override
-	public List<Usuario> editUsr(String usrName) {
-		return usuarioDao.editUsr(usrName);
+	public List<Usuario> searchUsr(String usrName) {
+		return usuarioDao.searchUsr(usrName);
 	}
 	
 	//@Override

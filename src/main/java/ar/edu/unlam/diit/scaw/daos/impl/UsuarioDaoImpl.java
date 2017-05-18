@@ -61,7 +61,7 @@ public class UsuarioDaoImpl implements UsuarioDao {
 	}
 
 	@Override
-	public List<Usuario> editUsr(String usrName) {		
+	public List<Usuario> searchUsr(String usrName) {		
 		String sql = "SELECT * FROM USUARIO WHERE USUARIO LIKE :usuario";
 		
 		Map<String, Object> params = new HashMap<String, Object>();

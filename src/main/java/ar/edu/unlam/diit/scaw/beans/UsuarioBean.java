@@ -46,6 +46,27 @@ public class UsuarioBean implements Serializable {
 		return "usuarios";
 	}
 	
+	public String register() {
+		
+		Usuario usuario = buildUsuario();
+		
+		if (usuario.getUsuario() != "" && usuario.getPassword() != "") {
+		
+			List<Usuario> list = service.searchUsr(usuario.getUsuario());
+			if(list.isEmpty()) {	// Si el usuario no existe se puede registrar en el sistema
+				usuario.setTipo(2); 		// Se registra como usuario comun
+				usuario.setAprobado("N");	// Se registra como no habilitado
+				
+				service.save(usuario);
+				
+				return "tareas";
+				
+			}
+		}
+		
+		return "registrarse";
+	}
+	
 	public String update(String usrName, int tipo, String aprobado) {
 		
 		ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
@@ -64,7 +85,7 @@ public class UsuarioBean implements Serializable {
 	}	
 	
 	public String editUsr(String nombreUsr) {
-		List<Usuario> list = service.editUsr(nombreUsr);
+		List<Usuario> list = service.searchUsr(nombreUsr);
 		if(list.isEmpty()) {
 			return "editarUsr";
 		}

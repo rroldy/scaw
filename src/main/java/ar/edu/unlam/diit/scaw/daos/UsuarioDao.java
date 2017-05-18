@@ -17,7 +17,7 @@ public interface UsuarioDao {
 	//corresponde al login de usuario
 	//public Usuario buscarUsuario(String usuario, String password);
 
-	public List<Usuario> editUsr(String usrName);
+	public List<Usuario> searchUsr(String usrName);
 
 	public void update(String usrNameOld, String usrName, int tipo, String aprobado);
 

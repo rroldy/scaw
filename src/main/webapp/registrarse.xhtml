@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	>
+
+<h:head>
+	<title>SCAW - Presentación de JSF</title>
+</h:head>
+
+<h:body>	
+	<ui:include src="/header.xhtml" />
+
+	<div class="panel-body">
+	
+		<h:form>
+			
+					
+			<h2>Registrarse</h2>
+
+			<h:panelGrid columns="3">
+
+				<h:outputLabel for="usuario">Usuario:</h:outputLabel>
+				<h:inputText value="#{usuarioBean.usuario}" id="usuario"></h:inputText>
+				<br />
+				<br />
+
+				<h:outputLabel for="password">Password:</h:outputLabel>
+				<h:inputSecret type="password" value="#{usuarioBean.password}" id="password"></h:inputSecret>
+				<br />
+				<br />
+	
+			</h:panelGrid>
+			<br />
+			<h:outputLabel>Nota: Una vez registrado, su acceso al sistema quedará pendiente de aprobación por parte del administrador.</h:outputLabel>
+			<br /><br />
+			<h:commandButton action="#{usuarioBean.register}" value="Registarse">
+			</h:commandButton> | <h:link value="Login" outcome="login" />
+		</h:form>
+	</div>
+	
+</h:body>
+</html>
