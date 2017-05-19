@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	>
+
+<h:head>
+	<title>SCAW - Presentación de JSF</title>
+</h:head>
+
+<h:body>
+	<f:metadata>
+    	<!-- En caso de no tener sesion se redirige a login -->
+    	<f:event type="preRenderView" listener="#{usuarioBean.verificarSesion}" />
+	</f:metadata>
+	
+	<ui:include src="/header.xhtml" />
+
+	<div class="panel-body">
+		<h:form id="formId" name="formId">
+			<!-- Guardo el antiguo nombre del usuario para hacer el UPDATE -->
+				<h:inputHidden value="#{usuarioBean.usuario}" id="userOld" name="formId:userOld"></h:inputHidden> 
+			<h3>Editar usuario</h3>
+			
+			<h:panelGrid columns="3">											
+				<h:outputLabel for="usuario">Usuario:</h:outputLabel>
+				<h:inputText value="#{usuarioBean.usuario}" />
+				<br />
+				<br />	
+				
+				<h:outputLabel for="aprobado">Password:</h:outputLabel>					
+				<h:inputSecret redisplay="true" value="#{usuarioBean.password}"/>
+				<br />
+				<br />
+				
+       	  	</h:panelGrid>
+       	  	<br />	
+       	  	<h:commandButton id="guardar" action="#{usuarioBean.updateInfoPersonal(usuarioBean.usuario,usuarioBean.password)}"	value="Guardar cambios">
+			</h:commandButton> | <h:link value="Volver" outcome="usuarios" />
+		</h:form>
+	</div>
+	
+</h:body>
+</html>

@@ -51,6 +51,20 @@ public class UsuarioDaoImpl implements UsuarioDao {
 	}
 	
 	@Override
+	public void updateInfoPersonal(String usrNameOld, String usrName, String password) {
+
+		String sql = "UPDATE USUARIO SET USUARIO = :usuario, PASSWORD = :password WHERE USUARIO LIKE :usuarioOld";
+
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("usuarioOld", usrNameOld);
+		params.put("usuario", usrName);
+		params.put("password", password);
+		
+		jdbcTemplate.update(sql, params);
+
+	}
+	
+	@Override
 	public void deleteUsr(String usrName) {		
 		String sql = "DELETE FROM USUARIO WHERE USUARIO LIKE :usuario";
 
@@ -59,7 +73,30 @@ public class UsuarioDaoImpl implements UsuarioDao {
 		params.put("usuario", usrName);
 		jdbcTemplate.update(sql, params);		
 	}
+	
+	@Override
+	public void cerrarCuenta(String usrName) {
+		String sql;
+		
+		/* BORRADO DE TAREAS CORRESPONDIENTES AL USUARIO */
+		
+		sql = "DELETE FROM TAREA WHERE CREADO_POR = (SELECT ID FROM USUARIO WHERE USUARIO LIKE :usuario)";
 
+		Map<String, Object> params = new HashMap<String, Object>();
+
+		params.put("usuario", usrName);
+		jdbcTemplate.update(sql, params);		
+
+		/* BORRADO DEL USUARIO */
+				
+		sql = "DELETE FROM USUARIO WHERE USUARIO LIKE :usuario";
+
+		params = new HashMap<String, Object>();
+
+		params.put("usuario", usrName);
+		jdbcTemplate.update(sql, params);
+	}
+	
 	@Override
 	public List<Usuario> searchUsr(String usrName) {		
 		String sql = "SELECT * FROM USUARIO WHERE USUARIO LIKE :usuario";

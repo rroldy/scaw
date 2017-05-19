@@ -10,6 +10,8 @@ public interface UsuarioService {
 
 	public void deleteUsr(String nombreUsr);
 	
+	public void cerrarCuenta(String nombreUsr);
+	
 	public List<Usuario> findAll();
 
 	public void changeUsrState(int idUsr, String state);
@@ -18,6 +20,8 @@ public interface UsuarioService {
 
 	public void update(String usrNameOld, String usrName, int tipo, String aprobado);
 
+	public void updateInfoPersonal(String usrNameOld, String usrName, String password);
+	
 	public List<Usuario> crearSesion(String usrName, String password);
 
 }

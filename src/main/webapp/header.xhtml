@@ -54,6 +54,10 @@
 					<h:link value="Listado tareas" outcome="tareas" /> |
 		  			<h:link value="Crear tarea" outcome="altaTarea" /> |		  			 	  		
 		  			<h:form padding="top"> 
+		  				<h:commandLink id="infoPersonal" value="Informacion personal" align="right" action="#{usuarioBean.editInfoPersonal(sessionScope.usuario.usuario)}" /> 
+		  			</h:form> |	
+		  			<h:link value="Cerrar cuenta" outcome="cerrarCuenta" /> |
+		  			<h:form padding="top"> 
 		  				<h:commandLink id="Salir" value="Salir" align="right" action="#{usuarioBean.eliminarSesion}" /> 
 		  			</h:form>	  		
 		  		</li>

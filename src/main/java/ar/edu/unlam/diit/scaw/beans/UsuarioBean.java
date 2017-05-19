@@ -77,12 +77,38 @@ public class UsuarioBean implements Serializable {
 		return "usuarios";
 	}
 	
+	public String updateInfoPersonal(String usrName, String password) throws ServletException {
+		
+		if(usrName != "" && password != ""){
+			ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+			String userOld = ec.getRequestParameterMap().get("formId:userOld");
+		
+			service.updateInfoPersonal(userOld, usrName, password);
+					
+			this.crearSesion(usrName, password);
+							
+			return "tareas";
+		
+		} else {
+			return "editarInfoPersonal";
+		}
+		
+	}
+	
 	public String deleteUsr(String nombreUsr) {
 		
-		service.deleteUsr(nombreUsr);				
+		service.cerrarCuenta(nombreUsr);				
 		
 		return "usuarios";
 	}	
+	
+	public String cerrarCuenta(String nombreUsr) throws ServletException {
+		
+		service.cerrarCuenta(nombreUsr);				
+		this.eliminarSesion();
+		
+		return "login";
+	}
 	
 	public String editUsr(String nombreUsr) {
 		List<Usuario> list = service.searchUsr(nombreUsr);
@@ -95,6 +121,18 @@ public class UsuarioBean implements Serializable {
 		this.setTipo(list.get(0).getTipo());		
 			
 		return "editarUsrDisplay";
+	}
+	
+	public String editInfoPersonal(String nombreUsr) {
+		List<Usuario> list = service.searchUsr(nombreUsr);
+		if(list.isEmpty()) {	// No deberia indicar que no existe
+			return "tareas";	// En tal caso muestro lista tareas
+		}
+		
+		this.setUsuario(nombreUsr);
+		this.setPassword(list.get(0).getPassword());
+				
+		return "editarInfoPersonalDisplay";
 	}
 	
 	public String changeUsrState(int idUsr, String state) {
