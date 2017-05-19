@@ -14,6 +14,8 @@ public interface TareaService {
 
 	public List<Tarea> findAll();
 	
+	public List<Tarea> findSpecific(String usuario);
+	
 	public List<Tarea> findPublic();
 	
 	public void update(String id, String titulo, String descripcion, Integer tipoTarea, Integer estado);

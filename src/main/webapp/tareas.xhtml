@@ -15,11 +15,20 @@
 	<ui:include src="/header.xhtml" /> 
 
 	<h2>Listado de tareas</h2>
-
+	
 	<!-- Usuario registrado-->
 	
 	<h:panelGroup rendered="#{sessionScope.usuario.tipo != NULL}"> 
-		<h:dataTable value="#{tareaBean.findAll}" var="tarea"
+		<h:form id="formBusqueda">
+			<h:selectOneMenu value = "tipoBusqueda" id="tipoBusqueda"> 
+		   		<f:selectItem itemValue = "Todas" itemLabel = "Todas" /> 
+		   		<f:selectItem itemValue = "ToDo" itemLabel = "To Do" /> 
+			</h:selectOneMenu>
+			&nbsp;<h:commandButton id="btnVer" onclick="#{tareaBean.findSpecific(sessionScope.usuario.usuario)}" value="Ver" /> 
+		</h:form>
+		<br /><br />
+		
+		<h:dataTable value="#{tareaBean.findSpecific(sessionScope.usuario.usuario)}" var="tarea"
 			styleClass="order-table" headerClass="order-table-header"
 			rowClasses="order-table-odd-row,order-table-even-row">
 			<h:column>
@@ -58,6 +67,17 @@
 						<h:commandLink value="Editar" id="editar" 
 						action="#{tareaBean.editTarea(tarea.id, tarea.titulo, tarea.descripcion, tarea.tipoTarea, tarea.estado, tarea.usuarioCreador)}"/> 	  														
 					</h:form> 
+				</h:panelGroup>
+			</h:column>
+			<h:column>
+		   		<f:facet name="header">Asignar a...</f:facet>
+		   		<h:panelGroup>
+					<h:form id="formUsuarios">
+						<h:selectOneMenu value = "comboUsuarios" id="comboUsuarios"> 
+		   					<f:selectItem itemValue = "Pepe" itemLabel = "Pepe" /> 
+		   					<f:selectItem itemValue = "Miguel" itemLabel = "Miguel" /> 
+						</h:selectOneMenu>						 
+					</h:form>
 				</h:panelGroup>
 			</h:column>			
 		</h:dataTable>

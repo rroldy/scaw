@@ -103,6 +103,26 @@ public class TareaBean implements Serializable {
 		return list;
 	}
 	
+	// Busca las tareas segun lo seleccionado (todas/pendientes)
+	public List<Tarea> findSpecific(String usuario) {
+		List<Tarea> list; 
+		ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+	    String tipoBusqueda = ec.getRequestParameterMap().get("formBusqueda:tipoBusqueda");
+	    
+	    if (tipoBusqueda != null) {
+	    	if (tipoBusqueda.toString().contains("ToDo")) { 
+	    		list = service.findSpecific(usuario); 	// Busca listado de tareas pendientes 
+	    	} 											// para el usuario en sesion
+	    	else {
+		    	list = service.findAll();
+		    }
+	    } else {
+	    	list = service.findAll();
+	    }
+	    				
+		return list;
+	}
+	
 	private Tarea buildTarea() {
 		Tarea tarea = new Tarea();
 		tarea.setId(this.id);

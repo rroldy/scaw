@@ -13,7 +13,6 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import ar.edu.unlam.diit.scaw.daos.TareaDao;
 import ar.edu.unlam.diit.scaw.entities.Tarea;
 
-
 public class TareaDaoImpl implements TareaDao {
 	@Autowired
 	NamedParameterJdbcTemplate jdbcTemplate;
@@ -81,7 +80,6 @@ public class TareaDaoImpl implements TareaDao {
 		Map<String, Object> params = new HashMap<String, Object>();
 
 		String sql = "SELECT T.*, U.USUARIO FROM TAREA T INNER JOIN USUARIO U ON U.ID = T.CREADO_POR";
-		//String sql = "SELECT * FROM TAREA";
 		
 		List<Tarea> result = jdbcTemplate.query(sql, params, new TareaMapper());
 
@@ -89,11 +87,24 @@ public class TareaDaoImpl implements TareaDao {
 	}
 	
 	@Override
+	public List<Tarea> findSpecific(String usuario) {		
+		String sql = "SELECT T.*, U.USUARIO FROM TAREA T INNER JOIN USUARIO U ON U.ID = T.CREADO_POR"
+				+ " WHERE U.USUARIO LIKE :usuario";
+
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("usuario", usuario);
+		
+		List<Tarea> result = jdbcTemplate.query(sql, params, new TareaMapper());
+
+		return result;	
+		
+	}
+	
+	@Override
 	public List<Tarea> findPublic() {
 		Map<String, Object> params = new HashMap<String, Object>();
 
 		String sql = "SELECT T.*, U.USUARIO FROM TAREA T INNER JOIN USUARIO U ON U.ID = T.CREADO_POR WHERE T.TIPOTAREA = 2";
-		//String sql = "SELECT * FROM TAREA";
 		
 		List<Tarea> result = jdbcTemplate.query(sql, params, new TareaMapper());
 

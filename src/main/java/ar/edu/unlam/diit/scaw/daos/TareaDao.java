@@ -10,6 +10,8 @@ public interface TareaDao {
 
 	public List<Tarea> findAll();
 	
+	public List<Tarea> findSpecific(String usuario);
+	
 	public List<Tarea> findPublic();
 	
 	public void deleteTarea(Integer id);

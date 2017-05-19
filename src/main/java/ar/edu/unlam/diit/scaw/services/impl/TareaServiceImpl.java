@@ -34,6 +34,11 @@ public class TareaServiceImpl implements TareaService {
 	}
 	
 	@Override
+	public List<Tarea> findSpecific(String usuario) {
+		return tareaDao.findSpecific(usuario);
+	}
+	
+	@Override
 	public List<Tarea> findPublic() {
 		return tareaDao.findPublic();
 	}
