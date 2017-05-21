@@ -26,8 +26,7 @@
 			</h:selectOneMenu>
 			&nbsp;<h:commandButton id="btnVer" onclick="#{tareaBean.findSpecific(sessionScope.usuario.usuario)}" value="Ver" /> 
 		</h:form>
-		<br /><br />
-		
+		<br /><br />					
 		<h:dataTable value="#{tareaBean.findSpecific(sessionScope.usuario.usuario)}" var="tarea"
 			styleClass="order-table" headerClass="order-table-header"
 			rowClasses="order-table-odd-row,order-table-even-row">
@@ -69,17 +68,6 @@
 					</h:form> 
 				</h:panelGroup>
 			</h:column>
-			<h:column>
-		   		<f:facet name="header">Asignar a...</f:facet>
-		   		<h:panelGroup>
-					<h:form id="formUsuarios">
-						<h:selectOneMenu value = "comboUsuarios" id="comboUsuarios"> 
-		   					<f:selectItem itemValue = "Pepe" itemLabel = "Pepe" /> 
-		   					<f:selectItem itemValue = "Miguel" itemLabel = "Miguel" /> 
-						</h:selectOneMenu>						 
-					</h:form>
-				</h:panelGroup>
-			</h:column>			
 		</h:dataTable>
 	</h:panelGroup>
 	

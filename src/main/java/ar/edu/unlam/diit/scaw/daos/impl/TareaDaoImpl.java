@@ -52,15 +52,19 @@ public class TareaDaoImpl implements TareaDao {
 	}
 	
 	@Override
-	public void update(String id, String titulo, String descripcion, Integer tipoTarea, Integer estado) {
+	public void update(String id, String titulo, String descripcion, Integer tipoTarea, Integer estado, String usuario) {
 
-		String sql = "UPDATE TAREA SET TITULO = :titulo, DESCRIPCION = :descripcion, TIPOTAREA = :tipoTarea, ESTADO = :estado WHERE ID = :id";
+		String sql = "UPDATE TAREA SET TITULO = :titulo, DESCRIPCION = :descripcion, TIPOTAREA = :tipoTarea, "
+				+ " ESTADO = :estado, CREADO_POR = (SELECT ID FROM USUARIO WHERE USUARIO LIKE :usuario) WHERE ID = :id";
+		
 		Map<String, Object> params = new HashMap<String, Object>();
+		
 		params.put("id", Integer.parseInt(id));
 		params.put("titulo", titulo);
 		params.put("descripcion", descripcion);
 		params.put("tipoTarea", tipoTarea);
 		params.put("estado", estado);		
+		params.put("usuario", usuario);		
 		
 		jdbcTemplate.update(sql, params);
 	}

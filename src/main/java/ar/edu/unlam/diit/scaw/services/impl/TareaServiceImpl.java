@@ -25,8 +25,8 @@ public class TareaServiceImpl implements TareaService {
 		return tareaDao.searchTarea(id);
 	}
 	@Override
-	public void update(String id,String titulo, String descripcion, Integer tipoTarea, Integer estado) {
-		tareaDao.update(id,titulo, descripcion, tipoTarea, estado);
+	public void update(String id,String titulo, String descripcion, Integer tipoTarea, Integer estado, String usuario) {
+		tareaDao.update(id,titulo, descripcion, tipoTarea, estado, usuario);
 	}
 	@Override
 	public List<Tarea> findAll() {

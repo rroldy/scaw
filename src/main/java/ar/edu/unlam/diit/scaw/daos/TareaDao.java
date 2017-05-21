@@ -18,6 +18,6 @@ public interface TareaDao {
 	
 	public List<Tarea> searchTarea(Integer tarea);
 	
-	public void update(String id, String titulo, String descripcion, Integer tipoTarea, Integer estado);
+	public void update(String id, String titulo, String descripcion, Integer tipoTarea, Integer estado, String usuario);
 
 }

@@ -2,6 +2,7 @@ package ar.edu.unlam.diit.scaw.beans;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
@@ -146,6 +147,17 @@ public class UsuarioBean implements Serializable {
 	public List<Usuario> getFindAll() {
 		List<Usuario> list = service.findAll();
 		return list;
+	}
+	
+	public ArrayList<String> getFindAllUsrNames() {
+		List<Usuario> list = service.findAll();		
+		ArrayList<String> usrNames = new ArrayList<String>();
+		
+		for (int i=0; i<list.size(); i++) {
+			usrNames.add(list.get(i).getUsuario().toString());
+		}
+		
+		return usrNames;
 	}
 		
 	private Usuario buildUsuario() {

@@ -55,7 +55,10 @@
 				</h:selectOneMenu>
 				<br />
 				<br />	
-				
+				<h:outputLabel for="descripcion">Asignada a:</h:outputLabel>
+				<h:selectOneMenu value="#{tareaBean.usuarioCreador}" id="comboUsuarios">
+    				<f:selectItems value="#{usuarioBean.findAllUsrNames}"/>
+				</h:selectOneMenu>
 
        	  	</h:panelGrid>
        	  	<br />	

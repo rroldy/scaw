@@ -85,12 +85,12 @@ public class TareaBean implements Serializable {
 		
 		ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
 	    String idTarea = ec.getRequestParameterMap().get("formId:idOld");
-		
-		service.update(idTarea, titulo, descripcion, tipoTarea, estado);
+		String usuario = ec.getRequestParameterMap().get("formId:comboUsuarios");
+		service.update(idTarea, titulo, descripcion, tipoTarea, estado, usuario);
 		
 		return "tareas";
 	}
-	
+		
 	// Busca todas las tareas guardadas
 	public List<Tarea> getFindAll() {		
 		List<Tarea> list = service.findAll();
