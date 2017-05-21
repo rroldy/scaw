@@ -30,9 +30,9 @@ public class UsuarioDaoImpl implements UsuarioDao {
 
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("usuario", usuario.getUsuario());
-		//Al guardarlo en la base de datos primero lo encriptamos en md5
-		String password = DigestUtils.md5Hex(usuario.getPassword());
-		params.put("password", password);
+		/* //Al guardarlo en la base de datos primero lo encriptamos en md5
+		String password = DigestUtils.md5Hex(usuario.getPassword());*/
+		params.put("password", usuario.getPassword());
 		params.put("tipo", usuario.getTipo());
 		params.put("aprobado", usuario.getAprobado());
 		jdbcTemplate.update(sql, params);
@@ -61,8 +61,8 @@ public class UsuarioDaoImpl implements UsuarioDao {
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("usuarioOld", usrNameOld);
 		params.put("usuario", usrName);
-		String pass = DigestUtils.md5Hex(password);
-		params.put("password", pass);
+		//String pass = DigestUtils.md5Hex(password);
+		params.put("password", password);
 		
 		jdbcTemplate.update(sql, params);
 
@@ -149,8 +149,8 @@ public class UsuarioDaoImpl implements UsuarioDao {
 		
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("usuario", usrName);
-		String pass = DigestUtils.md5Hex(password);
-		params.put("password", pass);
+		//String pass = DigestUtils.md5Hex(password);
+		params.put("password", password);
 		params.put("aprobado", "S");
 		
 		List<Usuario> result = jdbcTemplate.query(sql, params, new UsuarioMapper());

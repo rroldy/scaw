@@ -18,12 +18,13 @@
 		<jdbc:script location="classpath:db/sql/insert-data.sql" />
 	</jdbc:embedded-database>
 	
-	<!-- 
+	
+	<!--  
 	<jdbc:initialize-database data-source="dbcpDataSource">
     	<jdbc:script location="classpath:db/sql/create-db.sql" />
     	<jdbc:script location="classpath:db/sql/insert-data.sql" /> 			
-	</jdbc:initialize-database> 
-	 -->
+	</jdbc:initialize-database>  -->
+	 
 	<bean id="jdbcTemplate"
 		class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">
 		<constructor-arg ref="dbcpDataSource" />
