@@ -84,7 +84,7 @@ public class UsuarioBean implements Serializable {
 		if(usrName != "" && password != ""){
 			ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
 			String userOld = ec.getRequestParameterMap().get("formId:userOld");
-		
+					
 			service.updateInfoPersonal(userOld, usrName, password);
 					
 			this.crearSesion(usrName, password);
@@ -132,7 +132,6 @@ public class UsuarioBean implements Serializable {
 		}
 		
 		this.setUsuario(nombreUsr);
-		this.setPassword(list.get(0).getPassword());
 				
 		return "editarInfoPersonalDisplay";
 	}
